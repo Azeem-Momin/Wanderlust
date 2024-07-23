@@ -1,0 +1,23 @@
+Getting Started:-
+db setup
+REST apis for crud
+
+Model: Listing
+title --> string
+description  --> string
+image(URL)  --> string
+price  --> number
+location  --> string
+country  --> string
+
+
+Index route:-
+GET     /listing --> show all listings
+SHOW route(GET)  /listings/:id  --> show all data about particular id
+UPDATE: Edit & Update route
+GET   /listings/:id/edit  --> edit form --> on submit
+PUT   /listings/:id
+
+DELETE route:- to delete specified listings
+
+

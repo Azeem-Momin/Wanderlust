@@ -1,0 +1,15 @@
+<!-- since this alert is displaying even if new listing is not added hence we have added success exist or is success array length is > 0 then only show alert on addition of new listing -->
+<% if(success && success.length){ %>
+    <div class="alert alert-success alert-dismissible fade show col-6 offset-3" role="alert">
+        <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
+    <% } %>
+
+<% if(error && error.length){ %>
+    <div class="alert alert-danger alert-dismissible fade show col-6 offset-3" role="alert">
+         <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+     <% } %>
