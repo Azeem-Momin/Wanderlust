@@ -45,6 +45,10 @@ const listingSchema = new Schema({
             required: true,
         },
     },
+    category: {
+        type: String,
+        enum: ["mountains", "farms", "rooms", "trending", "cities", "castles", "pools", "arctic", "domes"],
+    }
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {  //this middleware will be called when any listing is delete

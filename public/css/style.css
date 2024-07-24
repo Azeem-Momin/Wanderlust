@@ -186,3 +186,8 @@ body {
     border-radius: 25px !important;
     padding: .5rem 2rem .5rem 2rem !important;
 }
+
+.dropdown-btn{
+    background-color: #fe424d !important;
+    padding: .3rem !important;
+}

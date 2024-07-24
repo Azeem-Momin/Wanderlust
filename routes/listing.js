@@ -15,8 +15,6 @@ router
     // Index route --> show all listings
     .get(wrapAsync(listingController.index))
     // create route
-    // 
-    // .post(isLoggedIn, validateListing, upload.single("listing[image]"), wrapAsync(listingController.createListing));
     .post(isLoggedIn,  upload.single("listing[image]"), wrapAsync(listingController.createListing));
 
 

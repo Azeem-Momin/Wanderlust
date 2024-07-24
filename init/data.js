@@ -188,6 +188,7 @@ const sampleListings = [
     location: "Boston",
     country: "United States",
     geometry: { type: 'Point', coordinates: [-71.058884, 42.360081] },
+    
   },
   {
     title: "Beachfront Bungalow in Bali",
