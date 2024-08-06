@@ -21,27 +21,8 @@ router
 // create new listing
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
-router.get("/search", async (req, res) => {
-    let { country } = req.query; // Use req.query to get data from GET requests
-
-    // Build a search query object
-    let searchQuery = {};
-    if (country) {
-        searchQuery.country = country;
-        console.log(searchQuery.country);
-        console.log(searchQuery);
-    }
-
-    try {
-        const allListings = await Listing.find(searchQuery); // Find listings based on the search query
-        console.log(allListings);
-        // console.log(searchQuery);
-        // res.status(200).json(listings); // Send listings as JSON response
-        res.render("listings/search.ejs", { allListings })
-    } catch (error) {
-        res.status(500).send("Server error");
-    }
-});
+// searching listings based on country
+router.get("/search", wrapAsync(listingController.searchListing));
 
 
 // show route

@@ -87,48 +87,21 @@ module.exports.destroyListing = async (req, res) => {
 
 
 
-// module.exports.getListingsByCategory = async (req, res) => {
-//     console.log(res.params);
-//     res.send("hi")
-// }
-
-
-// Add this function in your listings controller
-// module.exports.filterByCategory = async (req, res, next) => {
-//     const { category } = req.params;
-//     console.log(category);
+module.exports.searchListing = async (req, res) => {
+    let { country } = req.query; // Use req.query to get data from GET requests
+    // Build a search query object
+    let searchQuery = {};
+    if (country) {
+        searchQuery.country = country;
+        console.log(searchQuery.country);
+        console.log(searchQuery);
+    }
+        const allListings = await Listing.find(searchQuery); // Find listings based on the search query
+        console.log(allListings);
+        // res.status(200).json(listings); // Send listings as JSON response
+        res.render("listings/search.ejs", { allListings })
     
-//     try {
-//         const listings = await Listing.find({ category: category });
-//         console.log(listings);
-        
-//         res.render('/listings', { listings });
-//     } catch (e) {
-//         console.log(e);
-//         req.flash('error', 'Cannot find listings');
-//         res.redirect('/');
-//     }
-// };
-
-
-// module.exports.filterByCategory = async (req, res, next) => {
-//     let { category } = req.params;
-//     console.log(category);
-    
-//     // Convert hyphens to spaces and ensure case-insensitivity
-//     category = category.replace(/-/g, ' ').toLowerCase();
-    
-//     try {
-//         const listings = await Listing.find({ 'category': new RegExp('^' + category + '$', 'i') });
-//         console.log(listings);
-        
-//         res.render('listings', { listings });
-//     } catch (e) {
-//         console.log(e);
-//         req.flash('error', 'Cannot find listings');
-//         res.redirect('/');
-//     }
-// };
+}
 
 
 module.exports.filterByCategory = async (req, res, next) => {
