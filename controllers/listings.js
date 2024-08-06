@@ -23,15 +23,15 @@ module.exports.showListing = async (req, res) => {
     }
 };
 
-module.exports.createListing = async (req, res, next) => {    
- 
-        let response = await geocodingClient
-            .forwardGeocode({
-                query: req.body.listing.location,
-                limit: 1,
-            })
-            .send();
-        // res.send("done")
+module.exports.createListing = async (req, res, next) => {
+
+    let response = await geocodingClient
+        .forwardGeocode({
+            query: req.body.listing.location,
+            limit: 1,
+        })
+        .send();
+    // res.send("done")
 
     let url = req.file.path;
     let filename = req.file.filename;
@@ -45,7 +45,6 @@ module.exports.createListing = async (req, res, next) => {
     console.log(savedListing);
     req.flash("success", "New Listing Created!");
     console.log(listing)
-    console.log(req.body)
     console.log(listing.category)
     res.redirect("/listings");
 };
@@ -58,7 +57,7 @@ module.exports.editNewForm = async (req, res) => {
         res.redirect("/listings");
     } else {
         let originalImageUrl = listing.image.url;
-        originalImageUrl = originalImageUrl.replace("/upload","/upload/w_250");
+        originalImageUrl = originalImageUrl.replace("/upload", "/upload/w_250");
         res.render("listings/edit.ejs", { listing, originalImageUrl });
     }
 };
@@ -84,4 +83,64 @@ module.exports.destroyListing = async (req, res) => {
     console.log(deletedListing);
     req.flash("success", "Listing Deleted!");
     res.redirect("/listings");
+};
+
+
+
+// module.exports.getListingsByCategory = async (req, res) => {
+//     console.log(res.params);
+//     res.send("hi")
+// }
+
+
+// Add this function in your listings controller
+// module.exports.filterByCategory = async (req, res, next) => {
+//     const { category } = req.params;
+//     console.log(category);
+    
+//     try {
+//         const listings = await Listing.find({ category: category });
+//         console.log(listings);
+        
+//         res.render('/listings', { listings });
+//     } catch (e) {
+//         console.log(e);
+//         req.flash('error', 'Cannot find listings');
+//         res.redirect('/');
+//     }
+// };
+
+
+// module.exports.filterByCategory = async (req, res, next) => {
+//     let { category } = req.params;
+//     console.log(category);
+    
+//     // Convert hyphens to spaces and ensure case-insensitivity
+//     category = category.replace(/-/g, ' ').toLowerCase();
+    
+//     try {
+//         const listings = await Listing.find({ 'category': new RegExp('^' + category + '$', 'i') });
+//         console.log(listings);
+        
+//         res.render('listings', { listings });
+//     } catch (e) {
+//         console.log(e);
+//         req.flash('error', 'Cannot find listings');
+//         res.redirect('/');
+//     }
+// };
+
+
+module.exports.filterByCategory = async (req, res, next) => {
+    try {
+        const listings = await Listing.find({ 'category': 'castles' });
+        console.log('Listings found:', listings.length > 0 ? listings : 'None found');
+        // res.render('listings', { listings });
+        // res.json(, );
+
+    } catch (e) {
+        console.log('Error in fetching listings:', e);
+        req.flash('error', 'Cannot find listings');
+        res.redirect('/');
+    }
 };

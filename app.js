@@ -51,12 +51,6 @@ const sesssionOptions = {
     },
 };
 
-
-// app.get("/", (req, res) => {
-//     res.send("this is root");
-// }); 
-
-
 app.use(session(sesssionOptions))
 app.use(flash());
 
@@ -98,6 +92,8 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error.ejs", { message });
     // res.status(statusCode).send(message);
 });
+
+
 
 app.listen(3000, () => {
     console.log("Server is runing on 3000");

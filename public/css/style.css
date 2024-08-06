@@ -185,6 +185,7 @@ body {
 .search-inp{
     border-radius: 25px !important;
     padding: .5rem 2rem .5rem 2rem !important;
+    /* text-transform: capitalize; */
 }
 
 .dropdown-btn{

@@ -29,23 +29,36 @@
 
 
         <div class="dropdown mb-2">
-          Enter Listing type 
-          <button class="btn btn-secondary dropdown-toggle  dropdown-btn" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          Enter Listing type
+          <button class="btn btn-secondary dropdown-toggle dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton">
             Listing type
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Rooms</a></li>
-            <li><a class="dropdown-item" href="#">Pools</a></li>
-            <li><a class="dropdown-item" href="#">Farms</a></li>
-            <li><a class="dropdown-item" href="#">Camping</a></li>
-            <li><a class="dropdown-item" href="#">Castles</a></li>
-            <li><a class="dropdown-item" href="#">Mountains</a></li>
-            <li><a class="dropdown-item" href="#">Domes</a></li>
-            <li><a class="dropdown-item" href="#">City</a></li>
-            <li><a class="dropdown-item" href="#">Arctic</a></li>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" data-value="rooms">Rooms</a></li>
+            <li><a class="dropdown-item" href="#" data-value="pools">Pools</a></li>
+            <li><a class="dropdown-item" href="#" data-value="farms">Farms</a></li>
+            <li><a class="dropdown-item" href="#" data-value="camping">Camping</a></li>
+            <li><a class="dropdown-item" href="#" data-value="castles">Castles</a></li>
+            <li><a class="dropdown-item" href="#" data-value="mountains">Mountains</a></li>
+            <li><a class="dropdown-item" href="#" data-value="domes">Domes</a></li>
+            <li><a class="dropdown-item" href="#" data-value="city">City</a></li>
+            <li><a class="dropdown-item" href="#" data-value="arctic">Arctic</a></li>
           </ul>
+          <input type="hidden" name="listing[category]" id="listingCategory">
         </div>
+        
+        <script>
+          document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', event => {
+              event.preventDefault();
+              const category = event.target.getAttribute('data-value');
+              document.getElementById('listingCategory').value = category;
+              document.getElementById('dropdownMenuButton').textContent = event.target.textContent;
+            });
+          });
+        </script>
+        
+        
 
         <div class="row">
           <div class="mb-3 col-md-4">
