@@ -59,7 +59,7 @@ app.use(passport.session());  //to authenticate user we wanna authenticate it in
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser()); //serializeUser means user se related jitne bhi info h usko agr hum session k ander store kr wate h to that is serializing user
-passport.deserializeUser(User.deserializeUser());  
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
@@ -69,7 +69,7 @@ app.use((req, res, next) => {
 })
 
 // demo user
-app.get("/demouser", async (req,res)=>{
+app.get("/demouser", async (req, res) => {
     let fakeUser = new User({
         email: "helloworld@gmail.com",
         username: "student",
@@ -80,7 +80,7 @@ app.get("/demouser", async (req,res)=>{
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
-app.use("/",userRouter);
+app.use("/", userRouter);
 
 
 app.all("*", (req, res, next) => {
@@ -94,6 +94,10 @@ app.use((err, req, res, next) => {
 });
 
 
+
+// app.get("/category", (req, res) => {
+//     res.send("Hi");
+// })
 
 app.listen(3000, () => {
     console.log("Server is runing on 3000");

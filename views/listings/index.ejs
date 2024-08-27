@@ -1,68 +1,139 @@
 <% layout("/layouts/boilerplate") %>
 
-    <body>       
+    <body>
 
-            <div id="filters">
-                <div class="filter" id="trending">
-                    <div><i class="fa-solid fa-fire"></i></div>
-                    <p>Trending</p>
+        <div id="filters">
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="trending">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-fire"></i></div>
+                        <p>Trending</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="rooms">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-bed"></i></div>
+                        <p>Rooms</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="city">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-city"></i></div>
+                        <p>Iconic Cities</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="mountains">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-mountain-city"></i></div>
+                        <p>Mountains</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="castles">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-place-of-worship"></i></div>
+                        <p>Castles</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="pools">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-sharp-duotone fa-solid fa-person-swimming"></i></div>
+                        <p>Pools</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="camping">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-campground"></i></div>
+                        <p>Camping</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="farms">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-cow"></i></div>
+                        <p>Farms</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="arctic">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-snowflake"></i></div>
+                        <p>Arctic</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="domes">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-snowflake"></i></a></div>
+                        <p>Domes</p>
+                    </div>
+                </button>
+            </form>
+
+
+
+    
+
+            <div class="tax-toggle">
+                <div class="form-check-reverse form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Display total after tax</label>
                 </div>
-
-                <div class="filter" id="">
-                    <div><i class="fa-solid fa-bed"></i></div>
-                    <p>Rooms</p>
-                </div>
-
-                <div class="filter">
-                    <div><i class="fa-solid fa-city"></i></div>
-                    <p>Iconic Cities</p>
-                </div>
-
-                <div class="filter">
-                    <div><i class="fa-solid fa-mountain-city"></i></div>
-                    <p>Mountains</p>
-                </div>
-
-                <div class="filter">
-                    <div><i class="fa-solid fa-place-of-worship"></i></div>
-                    <p>Castles</p>
-                </div>
-
-                <div class="filter">
-                    <div><i class="fa-sharp-duotone fa-solid fa-person-swimming"></i></div>
-                    <p>Amazing Pools</p>
-                </div>
-
-                <div class="filter">
-                    <div><i class="fa-solid fa-campground"></i></div>
-                    <p>Camping</p>
-                </div>
-
-                <div class="filter">
-                    <div><i class="fa-solid fa-cow"></i></div>
-                    <p>Farms</p>
-                </div>
-
-                <div class="filter">
-                    <div><i class="fa-solid fa-snowflake"></i></div>
-                    <p>Arctic</p>
-                </div>
-
-                <div class="filter">
-                    <div><a href="/listings/category/dome"></a><i class="fa-solid fa-snowflake"></i></a></div>
-                    <p>Domes</p>
-                </div>
-
-       
-
-
-
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after tax</label>
             </div>
-        </div>
 
         </div>
 
@@ -104,29 +175,4 @@
             }
         })
 
-        document.addEventListener('DOMContentLoaded', function() {
-    let filters = document.querySelectorAll('.filter');
-
-    filters.forEach(filter => {
-        filter.addEventListener('click', function() {
-            // console.log("clicked");
-            
-            let category = this.querySelector('p').innerText.replace(/\s+/g, '-').toLowerCase(); 
-            console.log(category);
-            
-            fetch(`listings/category/${category}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the response data
-                    console.log(data); // For example, log the filtered listings
-                    // Update the page with the filtered listings
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-    });
-});
-
-        
     </script>
