@@ -137,6 +137,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    /* Adjust padding for button space */
+    padding: 0 50px;
 }
 
 .filter {
@@ -156,6 +158,10 @@ body {
     font-size: .8rem;
 }
 
+/* this is for scrolling of category */
+
+/* this is for scrolling of category */
+
 .tax-info {
     display: none;
 }
@@ -170,25 +176,132 @@ body {
     align-items: center;
 }
 
-.search-btn{
+.search-btn {
     background-color: #fe424d !important;
     color: white !important;
     border-radius: 25px !important;
     padding: 0 1rem 0 1rem !important;
 }
 
-.search-btn i{
+.search-btn i {
     display: inline;
     margin-right: .5rem;
 }
 
-.search-inp{
+.search-inp {
     border-radius: 25px !important;
     padding: .5rem 2rem .5rem 2rem !important;
     /* text-transform: capitalize; */
 }
 
-.dropdown-btn{
+.dropdown-btn {
     background-color: #fe424d !important;
     padding: .3rem !important;
 }
+
+
+/* Circular button styling */
+.scroll-btn {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scroll-btn:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.left-btn {
+    left: 10px;
+}
+
+.right-btn {
+    right: 10px;
+}
+
+#scrollable-div {
+    scroll-behavior: smooth;
+}
+
+/* Show scroll buttons for screen sizes 1200px and below */
+@media (max-width: 1200px) {
+    .scroll-btn {
+        display: flex;
+    }
+}
+
+/* Hide scroll buttons for screen sizes greater than 1200px */
+@media (min-width: 995px) {
+    .scroll-btn {
+        display: none;
+    }
+}
+
+/* Additional adjustments for smaller screens */
+@media (max-width: 576px) {
+    #filters {
+        padding: 0 20px;
+    }
+}
+
+
+/* toggle button responsiveness */
+
+.responsive-toggle {
+    font-size: 1rem;
+    /* Default font size */
+}
+
+@media (max-width: 576px) {
+
+    .responsive-toggle {
+        font-size: 0.8rem;
+        /* Smaller font size on smaller screens */
+    }
+
+    .form-check-label {
+        margin-right: 0.5rem;
+        /* Adjust spacing between label and toggle */
+    }
+
+    .form-check-input {
+        transform: scale(0.8);
+        /* Reduce the size of the toggle switch */
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .responsive-toggle {
+        font-size: 0.9rem;
+        /* Slightly larger font for mid-size screens */
+    }
+
+    .form-check-input {
+        transform: scale(0.9);
+        /* Adjust toggle switch size */
+    }
+}
+
+@media (max-width: 576px) {
+    .m-custom {
+        margin-right: 3rem !important;
+        margin-left: 3rem !important;
+    }
+}
+
+/* toggle button responsiveness */
+
