@@ -1,141 +1,311 @@
 <% layout("/layouts/boilerplate") %>
 
     <body>
+        <div id="filters" class="d-flex justify-content-center flex-nowrap overflow-hidden position-relative">
 
-        <div id="filters">
+            <button class="scroll-btn left-btn" onclick="scrollContentLeft()">&#8249;</button>
 
-
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="trending">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-fire"></i></div>
-                        <p>Trending</p>
-                    </div>
-                </button>
-            </form>
+            <div id="scrollable-div" class="d-flex flex-nowrap overflow-hidden ms-2 me-2 m-custom">
+                <!-- Insert your forms here -->
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="rooms">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-bed"></i></div>
-                        <p>Rooms</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="trending">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-fire"></i></div>
+                            <p>Trending</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="city">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-city"></i></div>
-                        <p>Iconic Cities</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="rooms">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-bed"></i></div>
+                            <p>Rooms</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="mountains">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-mountain-city"></i></div>
-                        <p>Mountains</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="city">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-city"></i></div>
+                            <p>Iconic Cities</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="castles">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-place-of-worship"></i></div>
-                        <p>Castles</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="mountains">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-mountain-city"></i></div>
+                            <p>Mountains</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="pools">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-sharp-duotone fa-solid fa-person-swimming"></i></div>
-                        <p>Pools</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="castles">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-place-of-worship"></i></div>
+                            <p>Castles</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="camping">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-campground"></i></div>
-                        <p>Camping</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="pools">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-sharp-duotone fa-solid fa-person-swimming"></i></div>
+                            <p>Pools</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="farms">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-cow"></i></div>
-                        <p>Farms</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="camping">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-campground"></i></div>
+                            <p>Camping</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="arctic">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-snowflake"></i></div>
-                        <p>Arctic</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="farms">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-cow"></i></div>
+                            <p>Farms</p>
+                        </div>
+                    </button>
+                </form>
 
 
-            <form action="/listings/categories/category" method="GET" id="categoryForm">
-                <input type="hidden" name="category" value="domes">
-                <button type="submit"
-                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                    <div class="filter">
-                        <div><i class="fa-solid fa-snowflake"></i></a></div>
-                        <p>Domes</p>
-                    </div>
-                </button>
-            </form>
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="arctic">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-snowflake"></i></div>
+                            <p>Arctic</p>
+                        </div>
+                    </button>
+                </form>
 
 
+                <form action="/listings/categories/category" method="GET" id="categoryForm">
+                    <input type="hidden" name="category" value="domes">
+                    <button type="submit"
+                        style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                        <div class="filter">
+                            <div><i class="fa-solid fa-snowflake"></i></a></div>
+                            <p>Domes</p>
+                        </div>
+                    </button>
+                </form>
 
-    
-
-            <div class="tax-toggle">
-                <div class="form-check-reverse form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Display total after tax</label>
-                </div>
             </div>
+            <button class="scroll-btn right-btn" onclick="scrollContentRight()">&#8250;</button>
 
         </div>
+
+
+       
+
+        <div class="container">
+            <div class="row">
+                <div class=" col-5 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-3 ms-auto">
+                    <div class=" tax-toggle d-flex justify-content-end align-items-center">
+                        <div class="form-check form-switch form-check-reverse responsive-toggle">
+                            <label class="form-check-label text-nowrap" for="flexSwitchCheckDefault">Display total after
+                                tax</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            
+            /* Ensure the toggle container has enough space on smaller screens */
+            .tax-toggle {
+                white-space: nowrap;
+            }
+
+            /* Adjusting the size of the label and toggle switch for smaller screens */
+            @media (max-width: 576px) {
+                .form-check-label {
+                    font-size: 0.9rem;
+                    /* Reduce font size slightly */
+                }
+
+                .form-check-input {
+                    transform: scale(0.9);
+                    /* Reduce the size of the switch */
+                }
+
+                .tax-toggle {
+                    width: 100%;
+                    /* Full width on smaller screens */
+                    justify-content: center;
+                    /* Align to start on small screens */
+                }
+            }
+
+           
+
+
+            @media (min-width: 1200px) and (max-width: 1399px) {
+                .col-xl-3{
+                    width: 28%;
+                }
+            }
+
+            @media (min-width: 768px) and (max-width: 991px) {
+                .col-md-5{
+                    width: 43%;
+                }
+            }
+
+            @media (min-width: 577px) and (max-width: 767px) {
+                .col-sm-7{
+                    width: 55%;
+                }
+            }
+
+            @media (min-width: 540px) and (max-width: 576px) {
+                .col-5{
+                    width: 43%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 520px) and (max-width: 540px) {
+                .col-5{
+                    width: 46%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 500px) and (max-width: 520px) {
+                .col-5{
+                    width: 47%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 465px) and (max-width: 500px) {
+                .col-5{
+                    width: 50%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 445px) and (max-width: 465px) {
+                .col-5{
+                    width: 53%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 425px) and (max-width: 445px) {
+                .col-5{
+                    width: 55%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 425px) and (max-width: 445px) {
+                .col-5{
+                    width: 55%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 400px) and (max-width: 425px) {
+                .col-5{
+                    width: 60%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media (min-width: 375px) and (max-width: 400px) {
+                .col-5{
+                    width: 63%;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media  (min-width: 365px) and (max-width: 375px) {
+                .col-5{
+                    width: 67% ;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media  (min-width: 350px) and (max-width: 365px) {
+                .col-5{
+                    width: 70% ;
+                    margin-right: 3rem;
+                }
+            }
+
+            @media  (min-width: 310px) and (max-width: 350px) {
+                .col-5{
+                    width: 80% ;
+                    margin-right: 3rem;
+                }
+              
+            }
+
+            @media   (max-width: 310px) {
+                .col-5{
+                    width: 100% ;
+                    margin-right: 3rem !important;
+                }
+              
+            }
+
+            /* Prevent text from wrapping and overflowing out of the container */
+            .form-check-label {
+                margin-right: 0.5rem;
+                /* Space between label and switch */
+            }
+
+            .form-check-input {
+                width: auto;
+                /* Prevent the switch from shrinking */
+            }
+        </style>
+
+
+
+        <!-- Your existing listings code -->
 
         <div class="row row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 mt-3">
             <% for(let listing of allListings){ %>
@@ -160,9 +330,31 @@
                 </a>
                 <% } %>
         </div>
+
+
+      
     </body>
 
+
     <script>
+        // left n right button logic
+        function scrollContentLeft() {
+            const scrollableDiv = document.getElementById("scrollable-div");
+            scrollableDiv.scrollBy({
+                left: -200,
+                behavior: "smooth"
+            });
+        }
+
+        function scrollContentRight() {
+            const scrollableDiv = document.getElementById("scrollable-div");
+            scrollableDiv.scrollBy({
+                left: 200,
+                behavior: "smooth"
+            });
+        }
+
+            // logic for toggle button of tax
         let taxSwitch = document.getElementById("flexSwitchCheckDefault");
         taxSwitch.addEventListener("click", () => {
             let taxInfo = document.getElementsByClassName("tax-info")
