@@ -1,40 +1,54 @@
-
-
-
-<!-- original -->
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+        <a class="navbar-brand d-flex align-items-center" href="/listings">
+            <i class="fa-regular fa-compass me-1"></i>
+            <span style="color: #fe424d; font-weight: bold;">Wanderlust</span>
+        </a>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
             <span class="navbar-toggler-icon"></span>
         </button>
+     
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/listings">Explore</a>
+            <br>
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search" method="GET" action="/listings/search">
+                    <input class="form-control me-2 search-inp" type="text" placeholder="Search Destinations" name="country"  pattern="^[^\d]*$" required>
+                    <button class="btn search-btn" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>Search
+                    </button>    
+                </form>   
             </div>
 
             <div class="navbar-nav ms-auto">
-                <form class="d-flex" role="search" method="GET" action="/listings/search">
-                    <input class="form-control me-2 search-inp" type="search" placeholder="Search Destinations" name="country">
-                    <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>    
-                  </form>   
-            </div>
-
-            <div class="navbar-nav ms-auto"> <!--ms-auto to set these on RHS-->
                 <a class="nav-link" href="/listings/new">Add new Listings</a>
                 <% if(!currUser){ %>
                     <a class="nav-link" href="/signup"><b>Sign up</b></a>
                     <a class="nav-link" href="/login"><b>Log in</b></a>
-                    <% } %>
-                        <% if(currUser){ %>
-                            <a class="nav-link" href="/logout"><b>Log out</b></a>
-                            <% } %>
+                <% } %>
+                <% if(currUser){ %>
+                    <a class="nav-link" href="/logout"><b>Log out</b></a>
+                <% } %>
             </div>
         </div>
     </div>
 </nav>
 
 
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        const searchInput = document.querySelector('.search-inp');
+        
+        // Check if the input is empty or contains only whitespace
+        if (!searchInput.value.trim()) {
+            searchInput.classList.add('is-invalid');
+            event.preventDefault(); // Prevent form submission
+        } else {
+            searchInput.classList.remove('is-invalid');
+        }
+    });
+    </script>
+    
 
 
 

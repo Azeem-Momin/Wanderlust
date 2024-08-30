@@ -132,6 +132,19 @@ body {
     width: 80vh;
 }
 
+@media (min-width:387) and (max-width: 768px) {
+   #map{
+     height: 40vh;
+     width: 45vh;
+   }
+}
+
+@media  (max-width: 386px) {
+   #map{
+     height: 40vh;
+     width: 35vh;
+   }
+}
 
 #filters {
     display: flex;
