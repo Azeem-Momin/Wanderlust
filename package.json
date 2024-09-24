@@ -1,4 +1,7 @@
 {
+  "engine":{
+    "node": "20.11.0"
+  },
   "name": "major_project",
   "version": "1.0.0",
   "description": "",
