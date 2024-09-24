@@ -132,17 +132,17 @@ body {
     width: 80vh;
 }
 
-@media (min-width:387) and (max-width: 768px) {
+@media (min-width:387px) and (max-width: 768px) {
    #map{
-     height: 40vh;
-     width: 45vh;
+     height: 50vh;
+     width: 55vh;
    }
 }
 
 @media  (max-width: 386px) {
    #map{
      height: 40vh;
-     width: 35vh;
+     width: 36vh;
    }
 }
 
