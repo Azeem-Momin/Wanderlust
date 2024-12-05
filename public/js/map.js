@@ -7,7 +7,7 @@ const map = new mapboxgl.Map({
   zoom: 10 // starting zoom
 });
 
-console.log(listing.geometry.coordinates)
+// console.log(listing.geometry.coordinates)
 
 // Create a default Marker and add it to the map.
 const marker = new mapboxgl.Marker({color:"red"})

@@ -44,8 +44,8 @@ module.exports.createListing = async (req, res, next) => {
     let savedListing = await newListing.save();
     console.log(savedListing);
     req.flash("success", "New Listing Created!");
-    console.log(listing)
-    console.log(listing.category)
+    // console.log(listing)
+    // console.log(listing.category)
     res.redirect("/listings");
 };
 
@@ -80,7 +80,7 @@ module.exports.updateListing = async (req, res) => {
 module.exports.destroyListing = async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
-    console.log(deletedListing);
+    // console.log(deletedListing);
     req.flash("success", "Listing Deleted!");
     res.redirect("/listings");
 };
@@ -93,11 +93,11 @@ module.exports.searchListing = async (req, res) => {
     let searchQuery = {};
     if (country) {
         searchQuery.country = country;
-        console.log(searchQuery.country);
-        console.log(searchQuery);
+        // console.log(searchQuery.country);
+        // console.log(searchQuery);
     }
         const allListings = await Listing.find(searchQuery); // Find listings based on the search query
-        console.log(allListings);
+        // console.log(allListings);
         // res.status(200).json(listings); // Send listings as JSON response
         res.render("listings/search.ejs", { allListings })
     

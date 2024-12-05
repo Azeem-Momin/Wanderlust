@@ -84,14 +84,14 @@ app.use((req, res, next) => {
 })
 
 // demo user
-app.get("/demouser", async (req, res) => {
-    let fakeUser = new User({
-        email: "helloworld@gmail.com",
-        username: "student",
-    });
-    let registeredUser = await User.register(fakeUser, "password"); //2nd parameter is password of user
-    res.send(registeredUser);
-});
+// app.get("/demouser", async (req, res) => {
+//     let fakeUser = new User({
+//         email: "helloworld@gmail.com",
+//         username: "student",
+//     });
+//     let registeredUser = await User.register(fakeUser, "password"); //2nd parameter is password of user
+//     res.send(registeredUser);
+// });
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);

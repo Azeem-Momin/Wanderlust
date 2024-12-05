@@ -1,25 +1,29 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md bg-white border-bottom sticky-top z-index-1">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/listings">
             <i class="fa-regular fa-compass me-1"></i>
             <span style="color: #fe424d; font-weight: bold;">Wanderlust</span>
         </a>
-        
+
+        <!-- Hamburger button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
             <span class="navbar-toggler-icon"></span>
         </button>
-     
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        <!-- Navbar content that will collapse on small screens -->
+        <div class="collapse navbar-collapse bg-white" id="navbarNavAltMarkup">
             <br>
+            <!-- Search form -->
             <div class="navbar-nav ms-auto">
                 <form class="d-flex" role="search" method="GET" action="/listings/search">
-                    <input class="form-control me-2 search-inp" type="text" placeholder="Search Destinations" name="country"  pattern="^[^\d]*$" required>
+                    <input class="form-control me-2 search-inp" type="text" placeholder="Search Destinations" name="country" pattern="^[^\d]*$" required>
                     <button class="btn search-btn" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>Search
                     </button>    
                 </form>   
             </div>
 
+            <!-- Navigation links -->
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="/listings/new">Add new Listings</a>
                 <% if(!currUser){ %>
@@ -27,7 +31,7 @@
                     <a class="nav-link" href="/login"><b>Log in</b></a>
                 <% } %>
                 <% if(currUser){ %>
-                    <a class="nav-link" href="/logout"><b>Log out</b></a>
+                    <a class="nav-link" href="/logout" style="background-color: pink;"><b>Log out</b></a>
                 <% } %>
             </div>
         </div>
@@ -47,12 +51,4 @@
             searchInput.classList.remove('is-invalid');
         }
     });
-    </script>
-    
-
-
-
-
-
-
-
+</script>

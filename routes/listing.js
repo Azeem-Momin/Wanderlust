@@ -45,7 +45,7 @@ router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editNew
 router.get('/categories/category', wrapAsync(async (req, res) => {
     let { category } = req.query;
     const allListings = await Listing.find({ category: category });
-    console.log(allListings);
+    // console.log(allListings);
     res.render('listings/category', { allListings });
     // res.send("hi");
 }));
