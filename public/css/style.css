@@ -125,9 +125,7 @@ body {
 }
 
 
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
-#map {
+/* #map {
     height: 50vh;
     width: 80vh;
 }
@@ -144,7 +142,26 @@ body {
      height: 40vh;
      width: 36vh;
    }
+} */
+
+#map {
+    width: 100%; /* Make the map take up the full width of its container */
+    height: 400px; /* Set a fixed height for the map */
+    border-radius: 10px; 
 }
+
+@media (max-width: 768px) {
+    #map {
+        height: 250px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    #map {
+        height: 250px ; /* Adjust height for very small screens */
+    }
+}
+
 
 #filters {
     display: flex;
