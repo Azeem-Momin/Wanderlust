@@ -87,15 +87,40 @@ body {
 
 
 /* card effect */
-.card-img-overlay {
-    opacity: 0;
+
+/* Parent hover effect */
+.card:hover .card-img-top {
+    opacity: .6;
+    /* Apply a hover effect to the image */
 }
 
-.card-img-overlay:hover {
-    opacity: .2;
-    background-color: white;
-
+/* Child element (icon) */
+.card-img-overlay i.fa-heart {
+    position: absolute;
+    right: 1rem;
+    color: #fe424d;
+    font-size: 1.5rem;
+    opacity: 1;
+    /* Ensure full visibility of the heart icon */
+    pointer-events: auto;
+    /* Allow pointer events for the child */
+    transition: transform 0.2s ease;
 }
+
+/* Prevent child element from inheriting parent hover styles */
+.card-img-overlay i.fa-heart:hover {
+    transform: scale(1.2);
+    /* Add a separate hover effect for the heart */
+    color: #fe424d;
+}
+
+.card-img-overlay .circle-heart {
+    position: absolute;
+    right: 2rem;
+    background-color: white !important;
+    border: 2px solid #fe424d !important;
+}
+
 
 /* new page */
 
@@ -113,6 +138,7 @@ body {
 /* show page */
 .show-image {
     height: 30vh;
+    opacity: 1 !important;
 }
 
 .btns {
@@ -145,20 +171,24 @@ body {
 } */
 
 #map {
-    width: 100%; /* Make the map take up the full width of its container */
-    height: 400px; /* Set a fixed height for the map */
-    border-radius: 10px; 
+    width: 100%;
+    /* Make the map take up the full width of its container */
+    height: 400px;
+    /* Set a fixed height for the map */
+    border-radius: 10px;
 }
 
 @media (max-width: 768px) {
     #map {
-        height: 250px; /* Adjust height for smaller screens */
+        height: 250px;
+        /* Adjust height for smaller screens */
     }
 }
 
 @media (max-width: 576px) {
     #map {
-        height: 250px ; /* Adjust height for very small screens */
+        height: 250px;
+        /* Adjust height for very small screens */
     }
 }
 
@@ -188,7 +218,6 @@ body {
     font-size: .8rem;
 }
 
-/* this is for scrolling of category */
 
 /* this is for scrolling of category */
 
@@ -334,4 +363,3 @@ body {
 }
 
 /* toggle button responsiveness */
-

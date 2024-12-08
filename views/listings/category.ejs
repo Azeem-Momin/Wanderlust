@@ -1,20 +1,24 @@
 <%- layout("/layouts/boilerplate") %>
 
-    <% if(allListings.length==0){ %>
-        <h3 style="margin-top: 1rem;">No listings of given category is added</h3>
+    <% if(allListings.length==0) { %>
+        <h3 style="margin-top: 1rem;">No listings of the given category are added</h3>
         <% } %>
 
-            <div class="row row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 mt-3">
-
-                <% for(let listing of allListings){ %>
-
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-xs-1 mt-3">
+                <% for (let listing of allListings) { %>
+                    <!-- Listing link that redirects to the listing page -->
                     <a href="/listings/<%= listing._id %>" class="listing-link">
                         <div class="card col listing-card">
+                            <!-- Listing Image -->
                             <img class="card-img-top" src="<%= listing.image.url %>" alt="listing_image"
                                 style="height: 20rem;">
-                            <!--listing.image extract image from db-->
-
-                            <div class="card-img-overlay">abcd</div>
+                            <!-- Heart Icon with Redirect -->
+                            <div class="card-img-overlay">
+                                <div class="circle-heart">
+                                    <!-- <i class="fa-regular fa-heart heart-icon" onclick="redirectToSignUp(event)"></i> -->
+                                </div>
+                            </div>
+                            <!-- Card body with Listing details -->
                             <div class="card-body">
                                 <p class="card-text">
                                     <b>
@@ -28,3 +32,14 @@
                     </a>
                     <% } %>
             </div>
+
+            <script>
+                // Redirect function for heart icon
+                function redirectToSignUp(event) {
+                    event.stopPropagation();  // Prevent the click from reaching the <a> tag
+                    event.preventDefault();    // Prevent the default behavior of the anchor link
+
+                    // Redirect to the sign-up page
+                    window.location.href = 'http://localhost:3000/signup';
+                }
+            </script>
