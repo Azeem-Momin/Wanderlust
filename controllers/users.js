@@ -1,4 +1,5 @@
-const User = require("../models/user.js"); 
+const User = require("../models/user.js");
+const sendEmail = require("./sendEmail.js"); // Import sendEmail utility
 
 module.exports.renderSignupForm = (req, res) => {
     res.render("users/signup.ejs");
@@ -9,11 +10,24 @@ module.exports.signup = async (req, res) => {
         let { username, email, password } = req.body;
         const newUser = new User({ email, username });
         const registeredUser = await User.register(newUser, password);
-        // console.log(registeredUser);
-        req.login(registeredUser, (err) => {//login method of passport automatically login user after signup
+        // Automatically log in the user after signup
+        req.login(registeredUser, async (err) => { //login method of passport automatically login user after signup
             if (err) {
                 return next(err);
             }
+
+            // Add email-sending functionality here
+            const subject = 'Welcome to Wanderlust!';
+            const text = `Hi ${username},\n\nThank you for signing up on Wanderlust! We're thrilled to have you as part of our community.\n\nHappy exploring,\nThe Wanderlust Team`;
+
+            try {
+                await sendEmail(email, subject, text);
+                console.log(`Welcome email sent to: ${email}`);
+            } catch (e) {
+                console.error('Error sending email:', e);
+                req.flash('error', 'Signup successful, but the welcome email could not be sent.');
+            }
+
             req.flash("success", "Welcome to Wanderlust!");
             res.redirect("/listings");
         });
@@ -23,7 +37,7 @@ module.exports.signup = async (req, res) => {
     }
 };
 
-module.exports.renderLoginForm =  (req, res) => {
+module.exports.renderLoginForm = (req, res) => {    
     res.render("users/login.ejs");
 };
 
@@ -35,7 +49,7 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.logout = (req, res, next) => {
-    req.logout((err) => {  //logout is built inn method that takes callback as argument
+    req.logout((err) => {  //logout is built-in method that takes callback as argument
         if (err) {
             return next(err);
         }
