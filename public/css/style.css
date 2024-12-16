@@ -229,11 +229,62 @@ body {
     border: 1px solid black;
     border-radius: 1rem;
     height: 3rem;
+    /* width: 230px; */
     padding: 1rem;
     margin-left: 3rem;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
 }
+
+@media (min-width: 576px) {
+    .tax-toggle {
+        width: 230px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tax-toggle {
+        width: 200px;
+    }
+}
+
+@media (max-width: 250px) {
+    .tax-toggle {
+        width: 10rem;
+    }
+}
+
+@media (max-width: 210px) {
+    .tax-toggle {
+        width: 9em;
+        /* display: block; */
+    }
+}
+
+@media (max-width:250px) {
+    .tax-content{
+        font-size: x-small;
+    }
+}
+
+@media (max-width: 210px) {
+    .tax-toggle {
+       
+        width: 8em;
+        /* display: block; */
+    }
+}
+
+@media (max-width: 210px) {
+    .tax-content {
+       
+        font-size: xx-small;
+        padding-left: .2rem;
+        /* padding-right: .2rem; */
+    }
+}
+
+
 
 .search-btn {
     background-color: #fe424d !important;
@@ -303,14 +354,12 @@ body {
     }
 }
 
-/* Hide scroll buttons for screen sizes greater than 1200px */
 @media (min-width: 995px) {
     .scroll-btn {
         display: none;
     }
 }
 
-/* Additional adjustments for smaller screens */
 @media (max-width: 576px) {
     #filters {
         padding: 0 20px;
