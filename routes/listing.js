@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const Listing = require("../models/listing.js");
-const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
+const { isLoggedIn,isLoggedInForLikes, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 const multer = require("multer");  //for parsing form's data
 const { storage } = require("../cloudConfig.js");
@@ -20,6 +20,10 @@ router
 
 // create new listing
 router.get("/new", isLoggedIn, listingController.renderNewForm);
+
+// to create heart icon
+router.get("/heart", isLoggedInForLikes, listingController.renderNewForm);
+
 
 // searching listings based on country
 router.get("/search", wrapAsync(listingController.searchListing));

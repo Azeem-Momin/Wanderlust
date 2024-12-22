@@ -90,7 +90,7 @@ body {
 
 /* Parent hover effect */
 .card:hover .card-img-top {
-    opacity: .6;
+    opacity: .8;
     /* Apply a hover effect to the image */
 }
 
@@ -205,14 +205,19 @@ body {
     text-align: center;
     margin-top: 2rem;
     margin-right: 2rem;
+    /* margin-left: 1.5rem; */
     opacity: .8;
 }
 
 .filter:hover {
+    color: #fe424d;
     transition: .3s ease;
     opacity: 1;
     cursor: pointer;
 }
+
+
+
 
 .filter p {
     font-size: .8rem;
@@ -269,18 +274,15 @@ body {
 
 @media (max-width: 210px) {
     .tax-toggle {
-       
         width: 8em;
-        /* display: block; */
+        height: 2rem;
+        border-radius: .8rem;
     }
 }
 
 @media (max-width: 210px) {
     .tax-content {
-       
         font-size: xx-small;
-        padding-left: .2rem;
-        /* padding-right: .2rem; */
     }
 }
 

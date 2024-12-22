@@ -1,24 +1,171 @@
 <%- layout("/layouts/boilerplate") %>
 
-    <% if(allListings.length==0) { %>
-        <h3 style="margin-top: 1rem;">No listings of the given category are added</h3>
-        <% } %>
 
-            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-xs-1 mt-3">
-                <% for (let listing of allListings) { %>
-                    <!-- Listing link that redirects to the listing page -->
+    <div id="filters" class="d-flex justify-content-center flex-nowrap overflow-hidden position-relative">
+
+        <button class="scroll-btn left-btn" onclick="scrollContentLeft()">&#8249;</button>
+
+        <div id="scrollable-div" class="d-flex flex-nowrap overflow-hidden ms-2 me-2 m-custom">
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="trending">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter" style="margin-left: 2rem;">
+                        <div><i class="fa-solid fa-fire"></i></div>
+                        <p>Trending</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="rooms">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-bed"></i></div>
+                        <p>Rooms</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="city">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-city"></i></div>
+                        <p>Iconic Cities</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="mountains">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-mountain-city"></i></div>
+                        <p>Mountains</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="castles">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-place-of-worship"></i></div>
+                        <p>Castles</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="pools">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-sharp-duotone fa-solid fa-person-swimming"></i></div>
+                        <p>Pools</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="camping">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-campground"></i></div>
+                        <p>Camping</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="farms">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-cow"></i></div>
+                        <p>Farms</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="arctic">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-snowflake"></i></div>
+                        <p>Arctic</p>
+                    </div>
+                </button>
+            </form>
+
+
+            <form action="/listings/categories/category" method="GET" id="categoryForm">
+                <input type="hidden" name="category" value="domes">
+                <button type="submit"
+                    style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
+                    <div class="filter">
+                        <div><i class="fa-solid fa-igloo"></i></a></div>
+                        <p>Domes</p>
+                    </div>
+                </button>
+            </form>
+
+        </div>
+        <button class="scroll-btn right-btn" onclick="scrollContentRight()">&#8250;</button>
+
+    </div>
+
+    <!-- Display tax toggle -->
+    <div class="container">
+        <div class="row">
+            <div class="ms-auto">
+                <div class="tax-toggle d-flex justify-content-center align-items-center ms-auto">
+                    <div class="form-check form-switch form-check-reverse responsive-toggle">
+                        <label class="form-check-label text-nowrap text-center tax-content"
+                            for="flexSwitchCheckDefault">Display total after
+                            tax</label>
+                        <input class="form-check-input tax-button" type="checkbox" role="switch"
+                            id="flexSwitchCheckDefault">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% if(allListings.length==0) { %>
+        <h3 style="margin-top: 1rem;">No listings of the given category have been added.</h3>
+        <% } else { %>
+
+            <h3 class="mt-3"><b>Category : <%= allListings[0].category %></b></h3>
+            <div class="row row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 mt-3">
+                <% for(let listing of allListings){ %>
+
+
                     <a href="/listings/<%= listing._id %>" class="listing-link">
                         <div class="card col listing-card">
-                            <!-- Listing Image -->
                             <img class="card-img-top" src="<%= listing.image.url %>" alt="listing_image"
                                 style="height: 20rem;">
-                            <!-- Heart Icon with Redirect -->
-                            <div class="card-img-overlay">
-                                <div class="circle-heart">
-                                    <!-- <i class="fa-regular fa-heart heart-icon" onclick="redirectToSignUp(event)"></i> -->
-                                </div>
-                            </div>
-                            <!-- Card body with Listing details -->
+                            <!--listing.image extract image from db-->
+
+                            <div class="card-img-overlay"><i class="fa-regular fa-heart"
+                                    onclick="redirectToSignUp(event)"></i></div>
                             <div class="card-body">
                                 <p class="card-text">
                                     <b>
@@ -32,14 +179,7 @@
                     </a>
                     <% } %>
             </div>
+            <% } %>
 
-            <script>
-                // Redirect function for heart icon
-                function redirectToSignUp(event) {
-                    event.stopPropagation();  // Prevent the click from reaching the <a> tag
-                    event.preventDefault();    // Prevent the default behavior of the anchor link
 
-                    // Redirect to the sign-up page
-                    window.location.href = 'http://localhost:3000/signup';
-                }
-            </script>
+               <script src="/js/homePage.js"></script>

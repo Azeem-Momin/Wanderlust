@@ -13,6 +13,16 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
+module.exports.isLoggedInForLikes = (req, res, next) => {
+    // console.log(req.user);
+    if (!req.isAuthenticated()) {
+        req.session.redirectUrl = req.originalUrl;
+        req.flash("error", "You must be logged in to like listings!");
+        return res.redirect("/login");
+    }
+    next();
+}
+
 module.exports.saveRedirectUrl = (req, res, next) => {
     if (req.session.redirectUrl) {
         res.locals.redirectUrl = req.session.redirectUrl; //since passport has access to req.session.redirectUrl and it will delete redirect url after login by default hence we are using locals coz locals have access to all the files and passport cant delete it

@@ -31,7 +31,6 @@ module.exports.createListing = async (req, res, next) => {
             limit: 1,
         })
         .send();
-    // res.send("done")
 
     let url = req.file.path;
     let filename = req.file.filename;
@@ -104,16 +103,16 @@ module.exports.searchListing = async (req, res) => {
 }
 
 
-module.exports.filterByCategory = async (req, res, next) => {
-    try {
-        const listings = await Listing.find({ 'category': 'castles' });
-        console.log('Listings found:', listings.length > 0 ? listings : 'None found');
-        // res.render('listings', { listings });
-        // res.json(, );
+// module.exports.filterByCategory = async (req, res, next) => {
+//     try {
+//         const listings = await Listing.find({ 'category': 'castles' });
+//         console.log('Listings found:', listings.length > 0 ? listings : 'None found');
+//         // res.render('listings', { listings });
+//         // res.json(, );
 
-    } catch (e) {
-        console.log('Error in fetching listings:', e);
-        req.flash('error', 'Cannot find listings');
-        res.redirect('/');
-    }
-};
+//     } catch (e) {
+//         console.log('Error in fetching listings:', e);
+//         req.flash('error', 'Cannot find listings');
+//         res.redirect('/');
+//     }
+// };

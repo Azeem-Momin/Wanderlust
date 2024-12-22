@@ -12,7 +12,7 @@
                     <input type="hidden" name="category" value="trending">
                     <button type="submit"
                         style="background: none; border: none; padding: 0; margin: 0; display: block; width: 100%;">
-                        <div class="filter">
+                        <div class="filter" style="margin-left: 2rem;">
                             <div><i class="fa-solid fa-fire"></i></div>
                             <p>Trending</p>
                         </div>
@@ -133,177 +133,28 @@
         </div>
 
 
+        <!-- Display tax toggle -->
         <div class="container">
             <div class="row">
                 <div class="ms-auto">
                     <div class="tax-toggle d-flex justify-content-center align-items-center ms-auto">
                         <div class="form-check form-switch form-check-reverse responsive-toggle">
-                            <label class="form-check-label text-nowrap text-center tax-content" for="flexSwitchCheckDefault">Display total after
+                            <label class="form-check-label text-nowrap text-center tax-content"
+                                for="flexSwitchCheckDefault">Display total after
                                 tax</label>
-                            <input class="form-check-input tax-button" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                            <input class="form-check-input tax-button" type="checkbox" role="switch"
+                                id="flexSwitchCheckDefault">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- <style>
-            
-            /* Ensure the toggle container has enough space on smaller screens */
-            .tax-toggle {
-                white-space: nowrap;
-            }
 
-            /* Adjusting the size of the label and toggle switch for smaller screens */
-            @media (max-width: 576px) {
-                .form-check-label {
-                    font-size: 0.9rem;
-                    /* Reduce font size slightly */
-                }
-
-                .form-check-input {
-                    transform: scale(0.9);
-                    /* Reduce the size of the switch */
-                }
-
-                .tax-toggle {
-                    width: 100%;
-                    /* Full width on smaller screens */
-                    justify-content: center;
-                    /* Align to start on small screens */
-                }
-            }
-
-           
-
-
-            @media (min-width: 1200px) and (max-width: 1399px) {
-                .col-xl-3{
-                    width: 28%;
-                }
-            }
-
-            @media (min-width: 768px) and (max-width: 991px) {
-                .col-md-5{
-                    width: 43%;
-                }
-            }
-
-            @media (min-width: 577px) and (max-width: 767px) {
-                .col-sm-7{
-                    width: 55%;
-                }
-            }
-
-            @media (min-width: 540px) and (max-width: 576px) {
-                .col-5{
-                    width: 43%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 520px) and (max-width: 540px) {
-                .col-5{
-                    width: 46%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 500px) and (max-width: 520px) {
-                .col-5{
-                    width: 47%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 465px) and (max-width: 500px) {
-                .col-5{
-                    width: 50%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 445px) and (max-width: 465px) {
-                .col-5{
-                    width: 53%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 425px) and (max-width: 445px) {
-                .col-5{
-                    width: 55%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 425px) and (max-width: 445px) {
-                .col-5{
-                    width: 55%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 400px) and (max-width: 425px) {
-                .col-5{
-                    width: 60%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media (min-width: 375px) and (max-width: 400px) {
-                .col-5{
-                    width: 63%;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media  (min-width: 365px) and (max-width: 375px) {
-                .col-5{
-                    width: 67% ;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media  (min-width: 350px) and (max-width: 365px) {
-                .col-5{
-                    width: 70% ;
-                    margin-right: 3rem;
-                }
-            }
-
-            @media  (min-width: 310px) and (max-width: 350px) {
-                .col-5{
-                    width: 80% ;
-                    margin-right: 3rem;
-                }
-              
-            }
-
-            @media   (max-width: 310px) {
-                .col-5{
-                    width: 100% ;
-                    margin-right: 3rem !important;
-                }
-              
-            }
-
-            /* Prevent text from wrapping and overflowing out of the container */
-            .form-check-label {
-                margin-right: 0.5rem;
-                /* Space between label and switch */
-            }
-
-            .form-check-input {
-                width: auto;
-                /* Prevent the switch from shrinking */
-            }
-        </style> -->
 
 
 
         <!-- listings code -->
-
         <div class="row row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 mt-3">
             <% for(let listing of allListings){ %>
 
@@ -313,7 +164,8 @@
                             style="height: 20rem;">
                         <!--listing.image extract image from db-->
 
-                        <div class="card-img-overlay"><i class="fa-regular fa-heart"></i></div>
+                        <div class="card-img-overlay"><i class="fa-regular fa-heart"
+                                onclick="redirectToSignUp(event)"></i></div>
                         <div class="card-body">
                             <p class="card-text">
                                 <b>
@@ -328,40 +180,10 @@
                 <% } %>
         </div>
 
-
-      
+        <script src="/js/homePage.js"></script>
     </body>
 
 
-    <script>
-        // left n right button logic
-        function scrollContentLeft() {
-            const scrollableDiv = document.getElementById("scrollable-div");
-            scrollableDiv.scrollBy({
-                left: -200,
-                behavior: "smooth"
-            });
-        }
 
-        function scrollContentRight() {
-            const scrollableDiv = document.getElementById("scrollable-div");
-            scrollableDiv.scrollBy({
-                left: 200,
-                behavior: "smooth"
-            });
-        }
 
-            // logic for toggle button of tax
-        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-        taxSwitch.addEventListener("click", () => {
-            let taxInfo = document.getElementsByClassName("tax-info")
-            for (info of taxInfo) {
-                if (info.style.display != "inline") {
-                    info.style.display = "inline"
-                } else {
-                    info.style.display = "none"
-                }
-            }
-        })
-
-    </script>
+  
