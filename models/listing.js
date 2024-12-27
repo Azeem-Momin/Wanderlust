@@ -48,7 +48,13 @@ const listingSchema = new Schema({
     category: {
         type: String,
         enum: ["mountains", "city", "farms", "rooms", "trending", "castles", "pools", "arctic", "domes", "camping"],
-    }
+    },
+    likes: [
+          {
+              type: mongoose.Schema.Types.ObjectId, // Store ObjectIDs of users who liked this listing
+              ref: 'User', // Reference the 'User' model
+          },
+      ],
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {  //this middleware will be called when any listing is delete

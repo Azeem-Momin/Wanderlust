@@ -80,21 +80,15 @@ app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
+    res.locals.currentUserId = req.isAuthenticated() ? req.user._id : null; // Highlighted middleware
+    console.log("Current User ID:", res.locals.currentUserId); // Debugging
     next();
 })
 
-// demo user
-// app.get("/demouser", async (req, res) => {
-//     let fakeUser = new User({
-//         email: "helloworld@gmail.com",
-//         username: "student",
-//     });
-//     let registeredUser = await User.register(fakeUser, "password"); //2nd parameter is password of user
-//     res.send(registeredUser);
-// });
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
+
 app.use("/", userRouter);
 
 

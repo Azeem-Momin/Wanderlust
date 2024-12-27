@@ -4,12 +4,17 @@ const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
+    const allListings = await Listing.find({}).populate('likes');
+    // const allListings = await Listing.find({});
     res.render("listings/index.ejs", { allListings });
 };
 
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
+};
+
+module.exports.likes = (req, res) => {
+    res.render("listings/likes.ejs");
 };
 
 module.exports.showListing = async (req, res) => {
@@ -22,6 +27,26 @@ module.exports.showListing = async (req, res) => {
         res.render("listings/show.ejs", { listing });
     }
 };
+
+// module.exports.showListingLike = async (req, res) => {
+//     let { id } = req.params;
+//     const listing = await Listing.findById(id)
+//         .populate({ path: "reviews", populate: { path: "author" } })
+//         .populate("owner");
+
+//     if (!listing) {
+//         req.flash("error", "Listing you requested does not exist!");
+//         return res.redirect("/listings");
+//     }
+
+//     // Get the logged-in user's ID if available
+//     const currentUserId = req.user ? req.user._id : null;
+
+//     // Pass the listing and currentUserId to the view
+//     res.render("listings/index.ejs", { listing, currentUserId });
+// };
+
+
 
 module.exports.createListing = async (req, res, next) => {
 
@@ -101,6 +126,42 @@ module.exports.searchListing = async (req, res) => {
         res.render("listings/search.ejs", { allListings })
     
 }
+
+// For listings like/unlike
+module.exports.like = async (req, res) => {
+    try {
+        const { listingId } = req.query; // Extract the listing ID from the query
+        const userId = req.user._id; // Get the logged-in user's ID
+
+        const listing = await Listing.findById(listingId);
+        if (!listing) {
+            return res.status(404).json({ message: "Listing not found" });
+        }
+
+        // Check if the user has already liked the listing
+        const hasLiked = listing.likes.includes(userId);
+
+        if (hasLiked) {
+            // Unlike the listing
+            listing.likes = listing.likes.filter(like => !like.equals(userId));
+        } else {
+            // Like the listing
+            listing.likes.push(userId);
+        }
+
+        await listing.save();
+
+        res.status(200).json({ 
+            success: true, 
+            liked: !hasLiked, 
+            likesCount: listing.likes.length 
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
 
 
 // module.exports.filterByCategory = async (req, res, next) => {

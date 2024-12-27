@@ -157,33 +157,72 @@
         <!-- listings code -->
         <div class="row row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 mt-3">
             <% for(let listing of allListings){ %>
+              <a href="/listings/<%= listing._id %>" class="listing-link">
+                <div class="card col listing-card">
+                  <img class="card-img-top" src="<%= listing.image.url %>" alt="listing_image" style="height: 20rem;">
+                  <!-- Heart icon -->
+                  <div class="card-img-overlay">
+                    <i 
+                      class="fa-heart <%= listing.likes.includes(currentUserId) ? 'fa-solid' : 'fa-regular' %>" 
+                      onclick="toggleLike(event, '<%= listing._id %>')"
+                    ></i>
+                    <!-- <i 
+                      class="fa-heart fa-regular" 
+                      onclick="toggleLike(event, '<%= listing._id %>')"
+                    ></i> -->
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      <b><%= listing.title %></b><br>
+                      <%= listing.price.toLocaleString("en-IN") %>/night
+                      <i class="tax-info">&nbsp;&nbsp;+18% GST</i>
+                    </p>
+                  </div>
+                </div>
+              </a>
+            <% } %>
+          </div>
+          
 
-                <a href="/listings/<%= listing._id %>" class="listing-link">
-                    <div class="card col listing-card">
-                        <img class="card-img-top" src="<%= listing.image.url %>" alt="listing_image"
-                            style="height: 20rem;">
-                        <!--listing.image extract image from db-->
-
-                        <div class="card-img-overlay"><i class="fa-regular fa-heart"
-                                onclick="redirectToSignUp(event)"></i></div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <b>
-                                    <%= listing.title %>
-                                </b> <br>
-                                <%= listing.price.toLocaleString("en-IN") %>/night
-                                    <i class="tax-info">&nbsp; &nbsp; +18% GST</i>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                <% } %>
-        </div>
 
         <script src="/js/homePage.js"></script>
     </body>
 
-
-
-
-  
+    <script>
+        async function toggleLike(event, listingId) {
+          event.preventDefault(); // Prevent default behavior (e.g., link navigation)
+      
+          const heartIcon = event.target;
+      
+          // Determine current like state
+          const isLiked = heartIcon.classList.contains('fa-solid'); // Solid = Liked
+          const action = isLiked ? 'unlike' : 'like';
+      
+          try {
+            // Send API request to update likes
+            const response = await fetch(`/listings/${listingId}/${action}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+      
+            if (response.ok) {
+              // Toggle heart icon class based on the action
+              if (action === 'like') {
+                heartIcon.classList.remove('fa-regular'); // Hollow
+                heartIcon.classList.add('fa-solid'); // Solid
+              } else {
+                heartIcon.classList.remove('fa-solid'); // Solid
+                heartIcon.classList.add('fa-regular'); // Hollow
+              }
+            } else {
+              console.error('Failed to update like status');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+      </script>
+      
+    

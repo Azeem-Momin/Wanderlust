@@ -13,15 +13,25 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
+
 module.exports.isLoggedInForLikes = (req, res, next) => {
-    // console.log(req.user);
     if (!req.isAuthenticated()) {
         req.session.redirectUrl = req.originalUrl;
         req.flash("error", "You must be logged in to like listings!");
+        console.log(req.originalUrl);
+        res.locals.currentUserId = null; // No logged-in user
+        // console.log(req.flash("error")); // Should log ["You must be logged in to like listings!"]
+        // console.log(req.user);
         return res.redirect("/login");
+    } else {
+        res.locals.currentUserId = req.user._id; // Set currentUserId to logged-in user's ID
+        next();
     }
-    next();
-}
+};
+
+
+
+
 
 module.exports.saveRedirectUrl = (req, res, next) => {
     if (req.session.redirectUrl) {
