@@ -132,6 +132,7 @@ body {
 .edit-btn {
     background-color: #fe424d !important;
     border: none !important;
+    width: 4rem !important;
 }
 
 
@@ -143,6 +144,7 @@ body {
 
 .btns {
     display: flex;
+    justify-content:start;
 }
 
 .show-card {

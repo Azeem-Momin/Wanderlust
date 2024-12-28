@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const Listing = require("../models/listing.js");
-const { isLoggedIn, isLoggedInForLikes, isOwner, validateListing } = require("../middleware.js");
+const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 const multer = require("multer");  //for parsing form's data
 const { storage } = require("../cloudConfig.js");
@@ -20,60 +20,6 @@ router
 
 // create new listing
 router.get("/new", isLoggedIn, listingController.renderNewForm);
-
-// to create heart icon
-// router.get("/:id/unlike", isLoggedInForLikes, listingController.likes);
-
-
-// Like a listing
-router.post('/:id/like', isLoggedInForLikes, async (req, res) => {
-  try {
-    const { id } = req.params; // Listing ID
-    const userId = req.user._id; // Assuming user authentication middleware provides req.user
-
-    const listing = await Listing.findById(id);
-    if (!listing) {
-      return res.status(404).json({ message: 'Listing not found' });
-    }
-
-
-    // Add user ID to the likes array if not already present
-    if (!listing.likes.includes(userId)) {
-      listing.likes.push(userId);
-      await listing.save();
-    }
-
-    res.status(200).json({ message: 'Liked successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-
-});
-
-
-// Unlike a listing
-router.post('/:id/unlike', isLoggedInForLikes, async (req, res) => {
-  try {
-    const { id } = req.params; // Listing ID
-    const userId = req.user._id; // Assuming user authentication middleware provides req.user
-
-    const listing = await Listing.findById(id);
-    if (!listing) {
-      return res.status(404).json({ message: 'Listing not found' });
-    }
-
-    // Remove user ID from the likes array if present
-    listing.likes = listing.likes.filter((id) => id.toString() !== userId.toString());
-    await listing.save();
-
-    res.status(200).json({ message: 'Unliked successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
 
 
 // searching listings based on country
@@ -105,7 +51,7 @@ router.get('/categories/category', wrapAsync(async (req, res) => {
   // res.send("hi");
 }));
 
-// router.get("/listings/")
+
 
 
 module.exports = router;

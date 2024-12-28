@@ -12,7 +12,7 @@ router
     .get(userController.renderSignupForm)
     .post(wrapAsync(userController.signup))
 
-    
+
 router
     .route("/login")
     .get(userController.renderLoginForm)
@@ -20,7 +20,7 @@ router
         failureRedirect: "/login",  //if not authenticated then redirect to the same page
         failureFlash: true,  //display flash message if not authenticated
     }),
-    userController.login);
+        userController.login);
 
 
 router.get("/logout", userController.logout);

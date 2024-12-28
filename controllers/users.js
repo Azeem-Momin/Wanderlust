@@ -22,7 +22,7 @@ module.exports.signup = async (req, res) => {
 
             try {
                 await sendEmail(email, subject, text);
-                console.log(`Welcome email sent to: ${email}`);
+                // console.log(`Welcome email sent to: ${email}`);
             } catch (e) {
                 console.error('Error sending email:', e);
                 req.flash('error', 'Signup successful, but the welcome email could not be sent.');
@@ -37,16 +37,36 @@ module.exports.signup = async (req, res) => {
     }
 };
 
-module.exports.renderLoginForm = (req, res) => {    
+module.exports.renderLoginForm = (req, res) => {
     res.render("users/login.ejs");
 };
+
+// module.exports.login = async (req, res) => {
+//     req.flash("success", "Welcome back to Wanderlust!");
+
+//     if (res.locals.redirectUrl) {
+//         res.redirect(res.locals.redirectUrl);
+//     }
+
+//     let redirectUrl = res.locals.redirectUrl || "/listings";
+//     res.redirect(redirectUrl);
+// };
 
 module.exports.login = async (req, res) => {
     req.flash("success", "Welcome back to Wanderlust!");
 
+    // Get the redirect URL from res.locals or default to '/listings'
     let redirectUrl = res.locals.redirectUrl || "/listings";
+
+    // Check if the redirect URL is '/listings/:id/like' and change it to '/listings'
+    if (redirectUrl.includes('/listings/') && redirectUrl.includes('/like')) {
+        redirectUrl = '/listings';
+    }
+
+    // Redirect the user to the determined URL
     res.redirect(redirectUrl);
 };
+
 
 module.exports.logout = (req, res, next) => {
     req.logout((err) => {  //logout is built-in method that takes callback as argument

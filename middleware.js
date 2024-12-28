@@ -14,21 +14,38 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 
+// module.exports.isLoggedInForLikes = (req, res, next) => {
+//     if (!req.isAuthenticated()) {
+//         req.session.redirectUrl = req.originalUrl;
+//         req.flash("error", "You must be logged in to like listings!");
+//         console.log(req.originalUrl);
+//         res.locals.currentUserId = null; // No logged-in user
+//         // console.log(req.flash("error")); // Should log ["You must be logged in to like listings!"]
+//         // console.log(req.user);
+//         return res.redirect("/login");
+//     } else {
+//         res.locals.currentUserId = req.user._id; // Set currentUserId to logged-in user's ID
+//         next();
+//     }
+// };
+
 module.exports.isLoggedInForLikes = (req, res, next) => {
     if (!req.isAuthenticated()) {
+        // Save the original URL the user tried to access
         req.session.redirectUrl = req.originalUrl;
-        req.flash("error", "You must be logged in to like listings!");
-        console.log(req.originalUrl);
-        res.locals.currentUserId = null; // No logged-in user
-        // console.log(req.flash("error")); // Should log ["You must be logged in to like listings!"]
-        // console.log(req.user);
-        return res.redirect("/login");
-    } else {
-        res.locals.currentUserId = req.user._id; // Set currentUserId to logged-in user's ID
-        next();
-    }
-};
 
+        // Set flash message for unauthenticated access
+        req.flash("error", "You must be logged in to like listings!");
+        return res.status(401).json({ redirectUrl: "/login" }); // Send a 401 Unauthorized status code
+       
+    }
+
+    // If authenticated, set the current user ID in res.locals for use in templates
+    res.locals.currentUserId = req.user._id;
+
+    // Proceed to the next middleware or route handler
+    next();
+};
 
 
 
@@ -74,7 +91,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
     let { id, reviewId } = req.params;
     let review = await Review.findById(reviewId);
     if (!review.author.equals(res.locals.currUser._id)) {
-        req.flash("error", "You are not author of this listing");
+        req.flash("error", "You are not author of this review");
         return res.redirect(`/listings/${id}`);
     }
     next();

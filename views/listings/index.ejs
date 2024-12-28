@@ -163,13 +163,10 @@
                   <!-- Heart icon -->
                   <div class="card-img-overlay">
                     <i 
-                      class="fa-heart <%= listing.likes.includes(currentUserId) ? 'fa-solid' : 'fa-regular' %>" 
+                      class="fa-heart <%= listing.likes.includes(currentUserId) ? 'fa-solid' : 'fa-regular' %>"
                       onclick="toggleLike(event, '<%= listing._id %>')"
                     ></i>
-                    <!-- <i 
-                      class="fa-heart fa-regular" 
-                      onclick="toggleLike(event, '<%= listing._id %>')"
-                    ></i> -->
+                    
                   </div>
                   <div class="card-body">
                     <p class="card-text">
@@ -188,41 +185,6 @@
         <script src="/js/homePage.js"></script>
     </body>
 
-    <script>
-        async function toggleLike(event, listingId) {
-          event.preventDefault(); // Prevent default behavior (e.g., link navigation)
-      
-          const heartIcon = event.target;
-      
-          // Determine current like state
-          const isLiked = heartIcon.classList.contains('fa-solid'); // Solid = Liked
-          const action = isLiked ? 'unlike' : 'like';
-      
-          try {
-            // Send API request to update likes
-            const response = await fetch(`/listings/${listingId}/${action}`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
-      
-            if (response.ok) {
-              // Toggle heart icon class based on the action
-              if (action === 'like') {
-                heartIcon.classList.remove('fa-regular'); // Hollow
-                heartIcon.classList.add('fa-solid'); // Solid
-              } else {
-                heartIcon.classList.remove('fa-solid'); // Solid
-                heartIcon.classList.add('fa-regular'); // Hollow
-              }
-            } else {
-              console.error('Failed to update like status');
-            }
-          } catch (error) {
-            console.error('Error:', error);
-          }
-        }
-      </script>
+   
       
     
