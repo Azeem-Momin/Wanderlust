@@ -4,7 +4,6 @@ const { listingSchema, reviewSchema } = require('./joiSchema.js');
 const ExpressError = require("./utils/ExpressError.js");
 
 module.exports.isLoggedIn = (req, res, next) => {
-    // console.log(req.user);
     if (!req.isAuthenticated()) {
         req.session.redirectUrl = req.originalUrl;
         req.flash("error", "You must be logged in to create listing!");
@@ -14,20 +13,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 
-// module.exports.isLoggedInForLikes = (req, res, next) => {
-//     if (!req.isAuthenticated()) {
-//         req.session.redirectUrl = req.originalUrl;
-//         req.flash("error", "You must be logged in to like listings!");
-//         console.log(req.originalUrl);
-//         res.locals.currentUserId = null; // No logged-in user
-//         // console.log(req.flash("error")); // Should log ["You must be logged in to like listings!"]
-//         // console.log(req.user);
-//         return res.redirect("/login");
-//     } else {
-//         res.locals.currentUserId = req.user._id; // Set currentUserId to logged-in user's ID
-//         next();
-//     }
-// };
 
 module.exports.isLoggedInForLikes = (req, res, next) => {
     if (!req.isAuthenticated()) {

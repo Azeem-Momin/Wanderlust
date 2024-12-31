@@ -16,11 +16,12 @@
             <!-- Search form -->
             <div class="navbar-nav ms-auto">
                 <form class="d-flex" role="search" method="GET" action="/listings/search">
-                    <input class="form-control me-2 search-inp" type="text" placeholder="Search by Country" name="country" pattern="^[^\d]*$" required>
+                    <input class="form-control me-2 search-inp" type="text" placeholder="Search by Country"
+                        name="country" pattern="^[^\d]*$" required>
                     <button class="btn search-btn" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>Search
-                    </button>    
-                </form>   
+                    </button>
+                </form>
             </div>
 
             <!-- Navigation links -->
@@ -29,10 +30,16 @@
                 <% if(!currUser){ %>
                     <a class="nav-link" href="/signup"><b>Sign up</b></a>
                     <a class="nav-link" href="/login"><b>Log in</b></a>
-                <% } %>
-                <% if(currUser){ %>
-                    <a class="nav-link" href="/logout"><b>Log out</b></a>
-                <% } %>
+                    <% } %>
+                        <% if(currUser){ %>
+                            <a href="/user/profile" class="text-decoration-none">
+                                <div class="me-2 d-flex align-items-center">
+                                    <i class="fa-regular fa-circle-user fs-3 m-2 profile" style="color: #fe424d;">
+                                    </i>
+                                </div>
+                            </a>
+                            <!-- <a class="nav-link" href="/logout"><b>Log out</b></a> -->
+                            <% } %>
             </div>
         </div>
     </div>
@@ -42,7 +49,7 @@
 <script>
     document.querySelector('form').addEventListener('submit', function (event) {
         const searchInput = document.querySelector('.search-inp');
-        
+
         // Check if the input is empty or contains only whitespace
         if (!searchInput.value.trim()) {
             searchInput.classList.add('is-invalid');

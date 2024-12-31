@@ -120,11 +120,11 @@ module.exports.searchListing = async (req, res) => {
         // console.log(searchQuery.country);
         // console.log(searchQuery);
     }
-        const allListings = await Listing.find(searchQuery); // Find listings based on the search query
-        // console.log(allListings);
-        // res.status(200).json(listings); // Send listings as JSON response
-        res.render("listings/search.ejs", { allListings })
-    
+    const allListings = await Listing.find(searchQuery); // Find listings based on the search query
+    // console.log(allListings);
+    // res.status(200).json(listings); // Send listings as JSON response
+    res.render("listings/search.ejs", { allListings })
+
 }
 
 // For listings like/unlike
@@ -151,10 +151,10 @@ module.exports.like = async (req, res) => {
 
         await listing.save();
 
-        res.status(200).json({ 
-            success: true, 
-            liked: !hasLiked, 
-            likesCount: listing.likes.length 
+        res.status(200).json({
+            success: true,
+            liked: !hasLiked,
+            likesCount: listing.likes.length
         });
     } catch (err) {
         console.error(err);
@@ -163,17 +163,3 @@ module.exports.like = async (req, res) => {
 };
 
 
-
-// module.exports.filterByCategory = async (req, res, next) => {
-//     try {
-//         const listings = await Listing.find({ 'category': 'castles' });
-//         console.log('Listings found:', listings.length > 0 ? listings : 'None found');
-//         // res.render('listings', { listings });
-//         // res.json(, );
-
-//     } catch (e) {
-//         console.log('Error in fetching listings:', e);
-//         req.flash('error', 'Cannot find listings');
-//         res.redirect('/');
-//     }
-// };

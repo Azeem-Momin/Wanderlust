@@ -26,6 +26,54 @@ body {
 }
 
 
+
+
+
+/* profile style */
+.profile:hover{
+    cursor: pointer;
+}
+
+.profile-picture{
+    border-radius: 50%;
+    width: 18rem;
+    height: 18rem;
+    box-shadow: #fe424d  0px 0px 30px; /* Add a shadow effect */
+
+}
+
+.logout-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+    width: 5rem !important;
+}
+
+
+.listing-filter {
+    margin: 15px;
+    border: 1px solid #fe424d;
+    border-radius: 10px;
+    border-radius: 5px; /* Rounded corners */
+    width: 20rem;
+    height: 8rem;
+    font-weight: bold; /* Make text bold */
+    cursor: pointer; /* Change cursor to pointer for interactivity */
+     /* Flexbox for centering text */
+     display: flex;
+     align-items: center; /* Centers vertically */
+     justify-content: center; /* Centers horizontally */
+     text-align: center; /* Ensures multiline text is centered */
+     box-shadow: #fe424d 5px 5px 10px; /* Add a shadow effect */
+}
+
+.listing-filter:hover {
+    background-color: #fe424d; /* Darker background on hover */
+    color: white; 
+    border-color: black;
+    transition: .3s ease; /* Smooth transition */
+}
+
+
 /* footer */
 .f-info-links a {
     text-decoration: none;
@@ -133,6 +181,13 @@ body {
     background-color: #fe424d !important;
     border: none !important;
     width: 4rem !important;
+}
+
+.booking-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+    width: 10rem !important;
+    padding: 8px 0px !important;
 }
 
 

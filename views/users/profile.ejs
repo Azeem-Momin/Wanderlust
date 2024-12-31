@@ -1,0 +1,38 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+
+        <div
+            class=" container row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 m-5 d-flex justify-content-space-between">
+
+            <div class="col-5 d-flex flex-column align-items-center">
+
+                <img src="<%= user.profilePicture %>" alt="Profile Picture" class="profile-picture">
+                <h1>
+                    <%= user.username %>
+                </h1>
+                <p>Email: <%= user.email %>
+                </p>
+                <button class="btn btn-dark logout-btn"><a class="nav-link" href="/logout"><b>Logout</b></a></button>
+            </div>
+
+            <!-- <div class="col-1"></div> -->
+
+            <div class="col-5">
+                <div class="listing-filter text-center">
+                    <h3>Owned Listings <i class="ml-2  fa-solid fa-arrow-right" style="vertical-align: middle;"></i></h3>
+                </div>
+                <div class="listing-filter ">
+                    <h3>Liked Listings <i class="ml-2 fa-solid fa-arrow-right" style="vertical-align: middle;"></i></h3>
+                </div>
+                <div class="listing-filter">
+                    <h3>Booked Listings<i class="ml-2 fa-solid fa-arrow-right" style="vertical-align: middle;" ></i></h3>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <script src="/js/homePage.js"></script>
+    </body>

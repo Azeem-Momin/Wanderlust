@@ -3,10 +3,7 @@ const Listing = require('../models/listing');
 module.exports.like = async (req, res) => {
     try {
       const { id } = req.params; // Listing ID
-      // console.log("check", req.user);
       const userId = req.user._id; // Assuming user authentication middleware provides req.user
-      console.log(userId);
-      console.log(req.params);
   
       const listing = await Listing.findById(id);
       if (!listing) {

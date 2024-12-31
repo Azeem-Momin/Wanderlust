@@ -29,10 +29,13 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 
+const mongoUrl = "mongodb://localhost:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
 
+
 async function main() {
-    await mongoose.connect(dbUrl);
+    // await mongoose.connect(dbUrl);
+    await mongoose.connect(mongoUrl);
 }
 
 main().then(() => {
@@ -82,7 +85,7 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
     res.locals.currentUserId = req.isAuthenticated() ? req.user._id : null; // Highlighted middleware
-    console.log("Current User ID:", res.locals.currentUserId); // Debugging
+    // console.log("Current User ID:", res.locals.currentUserId); // Debugging
     next();
 })
 
