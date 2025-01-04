@@ -14,12 +14,15 @@ const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const cron = require('node-cron');
 const User = require("./models/user.js");
+const Booking = require('./models/booking');
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const likeRoutes = require('./routes/likes'); 
+const bookingRoutes = require('./routes/bookings');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -93,6 +96,8 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/listings", likeRoutes);
+app.use("/listings", bookingRoutes);
+
 
 app.use("/", userRouter);
 
@@ -109,9 +114,14 @@ app.use((err, req, res, next) => {
 
 
 
-// app.get("/category", (req, res) => {
-//     res.send("Hi");
-// })
+cron.schedule('0 0 * * *', async () => {
+    // console.log("Cron job running for timezone check:", new Date());
+    const now = new Date();
+    await Booking.updateMany({ endDate: { $lt: now }, status: 'active' }, { status: 'completed' });
+}, {
+    timezone: "Asia/Kolkata" // Replace with your time zone
+});
+
 
 app.listen(3000, () => {
     console.log("Server is runing on 3000");

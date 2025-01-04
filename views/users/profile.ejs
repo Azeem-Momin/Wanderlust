@@ -1,14 +1,12 @@
 <% layout("/layouts/boilerplate") %>
 
     <body>
+        <div class="container row mt-5 d-flex justify-content-space-evenly">
 
-        <div
-            class=" container row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 m-5 d-flex justify-content-space-between">
-
-            <div class="col-5 d-flex flex-column align-items-center">
+            <div class="col-md-6 d-flex flex-column align-items-center mb-5">
 
                 <img src="<%= user.profilePicture %>" alt="Profile Picture" class="profile-picture">
-                <h1>
+                <h1 class="mt-2">
                     <%= user.username %>
                 </h1>
                 <p>Email: <%= user.email %>
@@ -16,21 +14,52 @@
                 <button class="btn btn-dark logout-btn"><a class="nav-link" href="/logout"><b>Logout</b></a></button>
             </div>
 
-            <!-- <div class="col-1"></div> -->
 
-            <div class="col-5">
-                <div class="listing-filter text-center">
-                    <h3>Owned Listings <i class="ml-2  fa-solid fa-arrow-right" style="vertical-align: middle;"></i></h3>
-                </div>
-                <div class="listing-filter ">
-                    <h3>Liked Listings <i class="ml-2 fa-solid fa-arrow-right" style="vertical-align: middle;"></i></h3>
-                </div>
-                <div class="listing-filter">
-                    <h3>Booked Listings<i class="ml-2 fa-solid fa-arrow-right" style="vertical-align: middle;" ></i></h3>
-                </div>
+            <div class="col-md-6 d-flex flex-column align-items-center">
 
+                <form action="/listings/user/owned" method="GET">
+                    <button type="submit" style="all: unset;">
+                        <div class="listing-filter text-center">
+                            <h3>Owned Listings <i class="ml-2  fa-solid fa-arrow-right"
+                                    style="vertical-align: middle;"></i>
+                            </h3>
+                        </div>
+                    </button>
+                </form>
+
+                <form action="/listings/user/liked" method="GET">
+                    <button type="submit" style="all: unset;">
+                        <div class="listing-filter text-center">
+                            <h3>Liked Listings <i class="ml-2  fa-solid fa-arrow-right"
+                                    style="vertical-align: middle;"></i>
+                            </h3>
+                        </div>
+                    </button>
+                </form>
+
+                <form action="/listings/user/booked" method="GET">
+                    <button type="submit" style="all: unset;">
+                        <div class="listing-filter text-center">
+                            <h3>Booked Listings <i class="ml-2  fa-solid fa-arrow-right"
+                                    style="vertical-align: middle;"></i>
+                            </h3>
+                        </div>
+                    </button>
+                </form>
+
+                <form action="/listings/user/reviews" method="GET">
+                    <button type="submit" style="all: unset;">
+                        <div class="listing-filter text-center">
+                            <h3>Your Reviews <i class="ml-2  fa-solid fa-arrow-right"
+                                    style="vertical-align: middle;"></i>
+                            </h3>
+                        </div>
+                    </button>
+                </form>
 
             </div>
+        </div>
+
         </div>
 
 

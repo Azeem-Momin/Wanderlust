@@ -1,0 +1,33 @@
+<% layout("/layouts/boilerplate") %>
+
+    <% if (validReviews.length > 0) { %>
+        <h3 class="my-3">Your Reviews</h3>
+        <div class="row">
+            <% validReviews.forEach((review, index)=> { %>
+                <% if (review.listing) { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="box-shadow: #fe424d 5px 5px 15px;">
+                            <div class="card-body p-3">
+                                <h5 class="card-title">
+                                    <%= review.listing.title %>
+                                </h5>
+                                <p class="text-muted" style="font-size: 0.8rem;">
+                                    <%= new Date(review.createdAt).toLocaleDateString('en-IN', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %> - 
+                                    <%= new Date(review.createdAt).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit' }) %>
+                                </p>
+                                
+                                
+                                <p class="card-text">
+                                    <%= review.comment %>
+                                </p>
+                                <a href="/listings/<%= review.listing._id %>" class="text-decoration-none">View
+                                    Listing</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                        <% }) %>
+        </div>
+        <% } if (validReviews.length===0) { %>
+            <h3 class="mt-2">You have not added any reviews.</h3>
+            <% } %>

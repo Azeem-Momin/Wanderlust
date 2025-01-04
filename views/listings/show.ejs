@@ -21,10 +21,18 @@
                 <p class="card-text mt-3 fs-5">Owned by <i>
                         <%= listing.owner.username %>
                     </i> <br>
-
-
                 </p>
 
+                <!-- <div class="d-flex"> -->
+                    
+                <!-- <p class="mr-2 text-muted d-inline" style="font-size: 0.8rem;"><i>Posted on:</i> -->
+                <p><i>Posted on:</i>
+                    <%= new Date(listing.createdAt).toLocaleDateString('en-IN', { weekday: 'short' , year: 'numeric' ,
+                        month: 'short' , day: 'numeric' }) %> -
+                        <%= new Date(listing.createdAt).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' , hour12:
+                            true, hour: '2-digit' , minute: '2-digit' }) %>
+                <!-- </div> -->
+                </p>
                 <p class="card-text">Description :
                     <%= listing.description %>
                 </p>
@@ -47,15 +55,6 @@
         </div>
 
 
-        <% if(currUser && !listing.owner._id.equals(currUser._id)) {%>
-            <div class="btns mb-3">
-                <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-md-3 booking-btn">Book the listing</a>
-
-                <!-- <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
-                    <button class="btn btn-dark offset-3">Delete</button>
-                </form> -->
-            </div>
-            <% } %>
 
         <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
             <div class="btns mb-3">
@@ -66,6 +65,82 @@
                 </form>
             </div>
             <% } %>
+
+
+
+                <div class="btns mb-3 mt-2 col-md-6 offset-md-3 col-12 d-flex flex-column">
+                    <!-- booking -->
+                    <% const activeBooking=listing.bookings ? listing.bookings.find(booking=> booking.status ===
+                        'active' &&
+                        booking.user._id.equals(currUser._id)) : null; %>
+
+                        <% if (listing.bookings && listing.bookings.length> 0) { %>
+
+                            <div class="alert alert-info">
+                                <h5>Bookings:</h5>
+                                <ul>
+                                    <% listing.bookings.forEach(booking=> { %>
+                                        <% if (booking.status==='active' ) { %>
+                                            <li>
+                                                Booked by <%= booking.user.username %> from <%=
+                                                        booking.startDate.toDateString() %> to <%=
+                                                            booking.endDate.toDateString() %>
+                                            </li>
+                                            <% } %>
+                                                <% }) %>
+                                </ul>
+                            </div>
+                            <% } %>
+
+                                <% if(currUser) { %>
+                                    <% if (!listing.owner._id.equals(currUser._id)) { %>
+                                        <% if (activeBooking) { %>
+                                            <div class="mb-3">
+                                                <form action="/listings/<%= listing._id %>/booking/cancel"
+                                                    method="POST">
+                                                    <button type="submit" class="btn btn-danger cancel-btn">Cancel
+                                                        Booking</button>
+                                                </form>
+                                            </div>
+                                            <% } else { %>
+
+                                                <div id="bookingForm" class="card col-md-6 offset-md-3 mt-3"
+                                                    style="border-color: #fe424d;">
+                                                    <div class="card-body p-3">
+                                                        <h5 class="card-title">Book the Listing</h5>
+                                                        <form action="/listings/<%= listing._id %>/booking"
+                                                            method="POST">
+                                                            <div class="form-group">
+                                                                <label for="startDate">Start Date</label>
+                                                                <input type="date" name="startDate" id="startDate"
+                                                                    class="form-control" required>
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <label for="endDate">End Date</label>
+                                                                <input type="date" name="endDate" id="endDate"
+                                                                    class="form-control" required>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary mt-3"
+                                                                style="background-color: #fe424d;">Book
+                                                                Now</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                                    <% } %>
+                                                        <% } %>
+                                                            <!-- booking -->
+
+
+
+                                                            <!-- <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
+                    <button class="btn btn-dark offset-3">Delete</button>
+                </form> -->
+                </div>
+
+
+
+
 
                 <hr>
 

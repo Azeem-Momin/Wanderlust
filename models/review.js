@@ -15,6 +15,10 @@ const reviewSchema = ({
     author: {
         type: Schema.Types.ObjectId,
         ref: "User",
+    },
+    listing: {
+        type: Schema.Types.ObjectId,
+        ref: "Listing",
     }
 });
 

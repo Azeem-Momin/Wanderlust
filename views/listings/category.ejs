@@ -153,7 +153,7 @@
         <h3 style="margin-top: 1rem;">No listings of the given category have been added.</h3>
         <% } else { %>
 
-            <h3 class="mt-3"><b>Category : <%= allListings[0].category %></b></h3>
+            <h3 class="mt-3"><b>Category : <%= allListings[0].category.charAt(0).toUpperCase() + allListings[0].category.slice(1) %></b></h3>
             <div class="row row-cols-lg-3 row-cols-mid-2 row-cols-sm-2 row-cols-xm--2 mt-3">
                 <% for(let listing of allListings){ %>
 

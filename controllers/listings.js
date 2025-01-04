@@ -1,5 +1,13 @@
 const Listing = require("../models/listing.js");
+const Booking = require('../models/booking');
+const Review = require('../models/review');
+const moment = require('moment-timezone');
+
+
+
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');  //means we r using mapbox's sdk geocoding
+const { valid } = require("joi");
+const review = require("../models/review");
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
@@ -13,13 +21,34 @@ module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
 };
 
-// module.exports.likes = (req, res) => {
-//     res.render("listings/likes.ejs");
+// original code
+// module.exports.showListing = async (req, res) => {
+//     let { id } = req.params;
+//     const listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" }, }).populate("owner"); //to populate(show) reviews of our listings along with listing
+//     if (!listing) {
+//         req.flash("error", "Listing you requested does not exist!");
+//         res.redirect("/listings");
+//     } else {
+//         res.render("listings/show.ejs", { listing });
+//     }
 // };
+
+
+
 
 module.exports.showListing = async (req, res) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" }, }).populate("owner"); //to populate(show) reviews of our listings along with listing
+    const listing = await Listing.findById(id)
+        .populate({ path: "reviews", populate: { path: "author" } })
+        .populate("owner")
+        .populate({
+            path: 'bookings',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+        }); // to populate(show) reviews of our listings along with listing and bookings
+
     if (!listing) {
         req.flash("error", "Listing you requested does not exist!");
         res.redirect("/listings");
@@ -28,23 +57,26 @@ module.exports.showListing = async (req, res) => {
     }
 };
 
-// module.exports.showListingLike = async (req, res) => {
-//     let { id } = req.params;
-//     const listing = await Listing.findById(id)
-//         .populate({ path: "reviews", populate: { path: "author" } })
-//         .populate("owner");
 
-//     if (!listing) {
-//         req.flash("error", "Listing you requested does not exist!");
-//         return res.redirect("/listings");
-//     }
 
-//     // Get the logged-in user's ID if available
-//     const currentUserId = req.user ? req.user._id : null;
+module.exports.showListingLike = async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id)
+        .populate({ path: "reviews", populate: { path: "author" } })
+        .populate("owner");
 
-//     // Pass the listing and currentUserId to the view
-//     res.render("listings/index.ejs", { listing, currentUserId });
-// };
+    if (!listing) {
+        req.flash("error", "Listing you requested does not exist!");
+        return res.redirect("/listings");
+    }
+
+    // Get the logged-in user's ID if available
+    const currentUserId = req.user ? req.user._id : null;
+
+    // Pass the listing and currentUserId to the view
+    res.render("listings/index.ejs", { listing, currentUserId });
+};
+
 
 
 
@@ -65,7 +97,9 @@ module.exports.createListing = async (req, res, next) => {
     newListing.owner = req.user._id;
     newListing.image = { url, filename };
     newListing.geometry = response.body.features[0].geometry;  //this val coming from mapbox
+    newListing.createdAt = moment.utc().tz('Asia/Kolkata').toDate(); // Using `.toDate()` to save as a Date object
     let savedListing = await newListing.save();
+    
     // console.log(savedListing);
     req.flash("success", "New Listing Created!");
     // console.log(listing)
@@ -161,5 +195,56 @@ module.exports.like = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+
+module.exports.bookListing = async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    if (!listing) {
+        req.flash("error", "Listing you requested does not exist!");
+        res.redirect("/listings");
+    } else {
+        res.render("listings/book.ejs", { listing });
+    }};
+
+
+module.exports.category = async (req, res) => {
+  let { category } = req.query;
+  const allListings = await Listing.find({ category: category });
+  res.render('listings/category', { allListings });
+}
+
+
+module.exports.ownedListings = async (req, res) => {
+    const allListings = await Listing.find({ owner: req.user._id });
+    res.render('listings/profile/owned', { allListings });
+  };
+
+
+module.exports.likedListings = async (req, res) => {
+    const allListings = await Listing.find({ likes: req.user._id });
+    // const allListings = user.likes;
+    res.render('listings/profile/liked', { allListings });
+  };
+
+
+module.exports.bookedListings = async (req, res) => {
+   
+        const bookings = await Booking.find({ user: req.user._id, status: 'active' }).populate('listing');
+        // const bookedListings = bookings.map(booking => booking.listing); original code
+        const bookedListings = bookings.map(booking => booking.listing).filter(listing => listing !== null); // Remove null values
+        res.render('listings/profile/booked', { bookedListings });
+}
+
+
+module.exports.userReviews = async (req, res) => {
+        const reviews = await Review.find({ author: req.user._id }).
+        populate('listing');
+        const validReviews = reviews.filter(review => review.listing);
+        // console.log(validReviews);
+        res.render('listings/profile/reviews', { validReviews });
+};
+
+
 
 

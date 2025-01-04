@@ -1,17 +1,23 @@
 const Listing = require("../models/listing.js");
 const Review = require("../models/review.js");
+const moment = require('moment-timezone');
+
 
 module.exports.createReview = async (req, res) => {
 
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
+
+    newReview.createdAt = moment.utc().tz('Asia/Kolkata').toDate(); // Using `.toDate()` to save as a Date object
+
     newReview.author = req.user._id;
+    newReview.listing = listing._id;
     listing.reviews.push(newReview);
 
     await newReview.save();
     await listing.save();
 
-    req.flash("success","New Review Created!");
+    req.flash("success", "New Review Created!");
     res.redirect(`/listings/${listing._id}`);
 };
 
@@ -21,7 +27,7 @@ module.exports.destroyReview = async (req, res) => {
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });  //to delete review from that listing
     await Review.findByIdAndDelete(reviewId);
 
-    req.flash("success","Review Deleted!");
+    req.flash("success", "Review Deleted!");
     res.redirect(`/listings/${id}`);
 };
 

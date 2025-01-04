@@ -7,6 +7,7 @@ const listingController = require("../controllers/listings.js");
 const multer = require("multer");  //for parsing form's data
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage }); //where we want to save file
+const Booking = require('../models/booking');
 
 
 // this when we have diff req on the same route. Compact form of writing code
@@ -41,12 +42,29 @@ router
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editNewForm));
 
 
+// booking listing
+router.get("/:id/book", isLoggedIn, wrapAsync(listingController.bookListing));
+
+
 // to show listing based on category
-router.get('/categories/category', wrapAsync(async (req, res) => {
-  let { category } = req.query;
-  const allListings = await Listing.find({ category: category });
-  res.render('listings/category', { allListings });
-}));
+router.get('/categories/category', wrapAsync(listingController.category));
+
+
+//show owned listings
+router.get('/user/owned', isLoggedIn, wrapAsync(listingController.ownedListings));
+
+
+//show liked listings
+router.get('/user/liked', isLoggedIn, wrapAsync(listingController.likedListings));
+
+
+//show booked listings
+router.get('/user/booked', isLoggedIn, wrapAsync(listingController.bookedListings));
+
+
+// show reviews of a user
+router.get('/user/reviews', isLoggedIn, wrapAsync(listingController.userReviews));
+
 
 
 module.exports = router;
