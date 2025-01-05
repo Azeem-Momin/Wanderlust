@@ -1,24 +1,10 @@
 const User = require("../models/user.js");
 const sendEmail = require("./sendEmail.js"); // Import sendEmail utility
-const multer = require('multer');
-const path = require('path');
+
 
 module.exports.renderSignupForm = (req, res) => {
     res.render("users/signup.ejs");
 };
-
-
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/uploads/profile_pictures'); // Folder where images will be saved
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Use timestamp as filename to prevent collisions
-    }
-});
-
-const upload = multer({ storage: storage }).single('profilePicture'); // Handling a single image file
 
 
 
@@ -27,15 +13,13 @@ module.exports.signup = async (req, res, next) => {
     try {
         // Extract data from the request body
         let { username, email, password } = req.body;
-
-        // Check if a file was uploaded
-        const profilePicture = req.file
-            ? '/uploads/profile_pictures/' + req.file.filename // Use the correct relative path for display
-            : '/images/default-profile.jpg'; // Default image if no file is uploaded
-
         // Create a new user
-        const newUser = new User({ email, username, profilePicture });
-
+        let url = req.file.path;
+        let filename = req.file.filename;
+        // const newUser = new User({ email, username, url, filename });
+        const newUser = new User({
+            email, username, profilePicture: { url, filename }
+        });
         // Register the user with Passport
         const registeredUser = await User.register(newUser, password);
 
@@ -59,55 +43,13 @@ module.exports.signup = async (req, res, next) => {
             req.flash("success", "Welcome to Wanderlust!");
             res.redirect("/listings");
         });
-    } catch (e) {
+    }
+    catch (e) {
         req.flash("error", e.message);
         res.redirect("/signup");
     }
 };
 
-
-
-// module.exports.signup = async (req, res, next) => {
-//     try {
-//         // Extract data from the request body
-//         let { username, email, password } = req.body;
-
-//         // Check if a file was uploaded
-//         const profilePicture = req.file
-//             ? '/uploads/profile_pictures/' + req.file.filename // Use the correct relative path for display
-//             : '/images/default-profile.jpg'; // Default image if no file is uploaded
-
-//         // Create a new user
-//         const newUser = new User({ email, username, profilePicture });
-
-//         // Register the user with Passport
-//         const registeredUser = await User.register(newUser, password);
-
-//         // Automatically log in the user after signup
-//         req.login(registeredUser, async (err) => {
-//             if (err) {
-//                 return next(err);
-//             }
-
-//             // Send a welcome email
-//             const subject = 'Welcome to Wanderlust!';
-//             const text = `Hi ${username},\n\nThank you for signing up on Wanderlust! We're thrilled to have you as part of our community.\n\nHappy exploring,\nMohammad Azeem Momin`;
-
-//             try {
-//                 await sendEmail(email, subject, text);
-//             } catch (e) {
-//                 console.error('Error sending email:', e);
-//                 req.flash('error', 'Signup successful, but the welcome email could not be sent.');
-//             }
-
-//             req.flash("success", "Welcome to Wanderlust!");
-//             res.redirect("/listings");
-//         });
-//     } catch (e) {
-//         req.flash("error", e.message);
-//         res.redirect("/signup");
-//     }
-// };
 
 
 

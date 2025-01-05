@@ -7,13 +7,11 @@
 
     <div class="row mt-3">
         <div class="col-md-6 offset-md-3 col-12">
-
             <h3>
                 <%= listing.title %>
             </h3>
         </div>
 
-        <!-- <div class="card col-md-6 offset-3 show-card listing-card col-11"> -->
         <div class="card col-md-6 offset-md-3 show-card listing-card col-12">
             <img src="<%= listing.image.url %>" class="card-img-top show-image" alt="listing_image">
             <div class="card-body">
@@ -23,9 +21,6 @@
                     </i> <br>
                 </p>
 
-                <!-- <div class="d-flex"> -->
-
-                <!-- <p class="mr-2 text-muted d-inline" style="font-size: 0.8rem;"><i>Posted on:</i> -->
                 <p><i>Posted on:</i>
                     <%= new Date(listing.createdAt).toLocaleDateString('en-IN', { weekday: 'short' , year: 'numeric' ,
                         month: 'short' , day: 'numeric' }) %> -
@@ -70,26 +65,31 @@
 
                 <div class="btns mb-3 mt-2 col-md-6 offset-md-3 col-12 d-flex flex-column">
                     <!-- booking -->
-                    <% const activeBooking=listing.bookings ? listing.bookings.find(booking=>
+                    <% const activeBooking=(listing.bookings && currUser) ? listing.bookings.find(booking=>
                         booking.status === 'active' &&
-                        currUser && booking.user._id.equals(currUser._id))
+                        booking.user && booking.user._id && booking.user._id.equals(currUser._id))
                         : null; %>
 
-                        <% if (listing.bookings && listing.bookings.length> 0) { %>
 
+                        <% if (listing.bookings && listing.bookings.length> 0) { %>
                             <div class="alert alert-info">
                                 <h5>Bookings:</h5>
-                                <ul>
-                                    <% listing.bookings.forEach(booking=> { %>
-                                        <% if (booking.status==='active' ) { %>
-                                            <li>
-                                                Booked by <%= booking.user.username %> from <%=
-                                                        booking.startDate.toDateString() %> to <%=
-                                                            booking.endDate.toDateString() %>
-                                            </li>
-                                            <% } %>
-                                                <% }) %>
-                                </ul>
+                                <% if(listing.bookings.length === 0) { %>
+                                    <p>No bookings</p>
+                                    <% } %>
+                                        <ul>
+                                            <% listing.bookings.forEach(booking=> { %>
+                                                <% if (booking.user) { %>
+                                                    <% if (booking.status==='active' ) { %>
+                                                        <li>
+                                                            Booked by <%= booking.user.username %> from <%=
+                                                                    booking.startDate.toDateString() %> to <%=
+                                                                        booking.endDate.toDateString() %>
+                                                        </li>
+                                                        <% } %>
+                                                            <% } %>
+                                                                <% }) %>
+                                        </ul>
                             </div>
                             <% } %>
 
@@ -132,19 +132,9 @@
                                                         <% } %>
                                                             <!-- booking -->
 
-
-
-                                                            <!-- <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
-                    <button class="btn btn-dark offset-3">Delete</button>
-                </form> -->
                 </div>
 
-
-
-
-
                 <hr>
-
                 <div class="col-lg-6 offset-md-3 mb-3 col-11 mt-2">
                     <% if(currUser) {%>
                         <h4>Leave a Review</h4>
@@ -188,41 +178,40 @@
                                 <div class="row">
                                     <p><b>All Reviews</b></p>
                                     <% for(review of listing.reviews){ %>
-                                        <div class="card col-md-5 ms-3 mb-3 col-12">
-                                            <div class="card-body">
-                                                <h5 class="card-title mt-2">@<%= review.author.username%>
-                                                </h5>
+                                        <% if(review.username){ %>
+                                            <div class="card col-md-5 ms-3 mb-3 col-12">
+                                                <div class="card-body">
+                                                    <h5 class="card-title mt-2">@<%= review.author.username%>
+                                                    </h5>
 
-                                                <p class="starability-result card-text" data-rating=<%=review.rating %>>
-                                                </p>
-                                                <p class="card-text mb-1">
-                                                    <%= review.comment %>
-                                                </p>
-                                                <!-- <hr> -->
-
-
-
-                                                <% if (currUser && review.author._id.equals(currUser._id)) { %>
-                                                    <form
-                                                        action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                                        method="POST" class="mb-3">
-                                                        <button class="btn btn-sm btn-dark mt-1">Delete</button>
-                                                    </form>
-                                                    <% } %>
-
-                                                        <hr>
-                                                        <h6 style="display: inline-block;">Have a talk with @<%=
-                                                                review.author.username%> at</h6>
-                                                        <a style="display: inline-block;"
-                                                            href="mailto:<%= review.author.email %>"
-                                                            class="text-decoration-none">
-                                                            <%= review.author.email %>
-                                                        </a>
+                                                    <p class="starability-result card-text" data-rating=<%=review.rating
+                                                        %>>
+                                                    </p>
+                                                    <p class="card-text mb-1">
+                                                        <%= review.comment %>
+                                                    </p>
 
 
+                                                    <% if (currUser && review.author._id.equals(currUser._id)) { %>
+                                                        <form
+                                                            action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                                            method="POST" class="mb-3">
+                                                            <button class="btn btn-sm btn-dark mt-1">Delete</button>
+                                                        </form>
+                                                        <% } %>
+
+                                                            <hr>
+                                                            <h6 style="display: inline-block;">Have a talk with @<%=
+                                                                    review.author.username%> at</h6>
+                                                            <a style="display: inline-block;"
+                                                                href="mailto:<%= review.author.email %>"
+                                                                class="text-decoration-none">
+                                                                <%= review.author.email %>
+                                                            </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <% } %>
+                                            <% } %>
+                                                <% } %>
                                 </div>
                                 <% } %>
                 </div>
@@ -232,9 +221,6 @@
                     <h3>Where you'll be</h3>
                     <div id="map"></div>
                 </div>
-
-
-
     </div>
 
     <script src="/js/map.js"></script>

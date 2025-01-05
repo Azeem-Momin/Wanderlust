@@ -5,7 +5,22 @@
 
             <div class="col-md-6 d-flex flex-column align-items-center mb-5">
 
-                <img src="<%= user.profilePicture %>" alt="Profile Picture" class="profile-picture">
+
+                <div style="position: relative; width: 18rem; height: 18rem;">
+                    <!-- User Profile Picture -->
+                    <img src="<%= user.profilePicture && user.profilePicture.url ? user.profilePicture.url : '' %>" 
+                         alt="Profile Picture" 
+                         class="profile-picture" 
+                         style="width: 18rem; height: 18rem;" 
+                         onError="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    
+                    <!-- Font Awesome Icon (fallback) -->
+                    <i class="fa-regular fa-circle-user profile" 
+                       style="color: #fe424d; font-size: 18rem; position: absolute; top: 0; left: 0; display: none;"></i>
+                </div>
+                
+                
+
                 <h1 class="mt-2">
                     <%= user.username %>
                 </h1>
@@ -63,5 +78,5 @@
         </div>
 
 
-        <script src="/js/homePage.js"></script>
+        <!-- <script src="/js/homePage.js"></script> -->
     </body>

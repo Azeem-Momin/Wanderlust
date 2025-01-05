@@ -34,24 +34,28 @@
                     <a class="nav-link" href="/login"><b>Log in</b></a>
                     <% } %>
                         <% if(currUser){ %>
-
-
                             <a href="/user/profile" class="text-decoration-none">
                                 <div class="me-2 d-inline-flex flex-column align-items-center">
                                     <% if (currUser.profilePicture) { %>
-                                        <img src="<%= currUser.profilePicture %>" alt="Profile Picture"
-                                            class="rounded-circle" style="width: 40px; height: 40px;">
+
+                                        <div style="position: relative; width: 30px; height: 20px;" class="mt-1">
+                                            <img src="<%= currUser.profilePicture && currUser.profilePicture.url ? currUser.profilePicture.url : '' %>"
+                                                 alt="img"
+                                                 class="rounded-circle"
+                                                 style="width: 40px; height: 30px;"
+                                                 onError="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+
+                                            <i class="fa-regular fa-circle-user fs-3 profile"
+                                               style="color: #fe424d; position: absolute; top: 0; left: 0; width: 40px; height: 40px; display: none;"></i>
+                                        </div>
+                                        
+                                            
                                         <% } else { %>
                                             <i class="fa-regular fa-circle-user fs-3 profile"
                                                 style="color: #fe424d;"></i>
                                             <% } %>
-                                                <!-- <p style="font-size: 9px; margin: 0; color: #fe424d;"><b>Profile</b></p> -->
                                 </div>
                             </a>
-
-
-
-                            <!-- <a class="nav-link" href="/logout"><b>Log out</b></a> -->
                             <% } %>
             </div>
         </div>

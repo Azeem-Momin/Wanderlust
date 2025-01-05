@@ -4,7 +4,6 @@ const Review = require('../models/review');
 const moment = require('moment-timezone');
 
 
-
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');  //means we r using mapbox's sdk geocoding
 const { valid } = require("joi");
 const review = require("../models/review");
@@ -20,20 +19,6 @@ module.exports.index = async (req, res) => {
 module.exports.renderNewForm = (req, res) => {
     res.render("listings/new.ejs");
 };
-
-// original code
-// module.exports.showListing = async (req, res) => {
-//     let { id } = req.params;
-//     const listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" }, }).populate("owner"); //to populate(show) reviews of our listings along with listing
-//     if (!listing) {
-//         req.flash("error", "Listing you requested does not exist!");
-//         res.redirect("/listings");
-//     } else {
-//         res.render("listings/show.ejs", { listing });
-//     }
-// };
-
-
 
 
 module.exports.showListing = async (req, res) => {

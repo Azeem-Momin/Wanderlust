@@ -35,7 +35,6 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 
-const mongoUrl = "mongodb://localhost:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
 
 

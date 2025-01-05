@@ -1,3 +1,4 @@
+const { url } = require('inspector');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
@@ -8,8 +9,8 @@ const userSchema = new Schema({
         required: true,
     },
     profilePicture: {
-        type: String,
-        default: '/images/default-profile.jpg', // Default image
+        url: String,
+        filename: String, 
     },
 });
 

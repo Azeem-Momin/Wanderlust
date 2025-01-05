@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
-const Listing = require("../models/listing.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 const multer = require("multer");  //for parsing form's data
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage }); //where we want to save file
-const Booking = require('../models/booking');
 
 
 // this when we have diff req on the same route. Compact form of writing code
