@@ -482,4 +482,34 @@ body {
    height: 230px;
    width: 230px;
    border-radius: 50%;
+   box-shadow: 0 4px 15px rgba(254, 66, 77, 0.4); /* Subtle shadow with #fe424d */
+   object-fit: cover; /* Ensure proper scaling */
+
+}
+
+.custom-heading {
+    font-family: 'Poppins', sans-serif; /* Modern, clean font */
+    font-size: 1.5rem; /* Adjust size as per need */
+    color: #fe424d; /* Matches your site's primary color */
+    text-transform: uppercase; /* For a bold, standout look */
+    letter-spacing: 2px; /* Adds spacing between letters */
+    position: relative;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #fe424d, #ff737c); /* Subtle gradient */
+    color: white; /* Makes text pop against gradient */
+    border-radius: 10px; /* Smooth, rounded edges */
+    box-shadow: 0 4px 10px rgba(254, 66, 77, 0.3); /* Subtle shadow effect */
+}
+
+.custom-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 3px;
+    background: #fe424d;
+    border-radius: 2px;
+    opacity: 0.8;
 }
