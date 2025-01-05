@@ -311,7 +311,6 @@ const sampleListings = [
     country: "United Kingdom",
     geometry: { type: 'Point', coordinates: [5.0993, 57.3596] },
     category: 'castles',
-    category: 'camping',
     likes: [],
   },
   {

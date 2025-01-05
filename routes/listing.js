@@ -66,5 +66,8 @@ router.get('/user/booked', isLoggedIn, wrapAsync(listingController.bookedListing
 router.get('/user/reviews', isLoggedIn, wrapAsync(listingController.userReviews));
 
 
+router.get('/about', (req, res) => {
+  res.render('about');
+});
 
 module.exports = router;

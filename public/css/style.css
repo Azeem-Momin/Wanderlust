@@ -476,3 +476,10 @@ body {
     background-color: #fe424d !important;
     width:8.7rem !important;
 }
+
+/* about image */
+.about-image {
+   height: 230px;
+   width: 230px;
+   border-radius: 50%;
+}

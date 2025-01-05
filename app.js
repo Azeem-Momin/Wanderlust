@@ -24,6 +24,9 @@ const userRouter = require("./routes/user.js");
 const likeRoutes = require('./routes/likes'); 
 const bookingRoutes = require('./routes/bookings');
 
+
+
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -37,8 +40,8 @@ const dbUrl = process.env.ATLASDB_URL;
 
 
 async function main() {
-    // await mongoose.connect(dbUrl);
-    await mongoose.connect(mongoUrl);
+    await mongoose.connect(dbUrl);
+    // await mongoose.connect(mongoUrl);
 }
 
 main().then(() => {
@@ -93,14 +96,18 @@ app.use((req, res, next) => {
 })
 
 
+
+
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/listings", likeRoutes);
 app.use("/listings", bookingRoutes);
-
-
 app.use("/", userRouter);
 
+
+app.get('/about', (req, res) => {
+    res.render('listings/about'); // Render the EJS file
+});
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
@@ -121,6 +128,8 @@ cron.schedule('0 0 * * *', async () => {
 }, {
     timezone: "Asia/Kolkata" // Replace with your time zone
 });
+
+
 
 
 app.listen(3000, () => {
