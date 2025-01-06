@@ -37,7 +37,6 @@ module.exports.signup = async (req, res, next) => {
                 await sendEmail(email, subject, text);
             } catch (e) {
                 console.error('Error sending email:', e);
-                req.flash('error', 'Signup successful, but the welcome email could not be sent.');
             }
 
             req.flash("success", "Welcome to Wanderlust!");
