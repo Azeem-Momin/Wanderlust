@@ -9,6 +9,8 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+
+
 const sendEmail = async (to, subject, text) => {
     const mailOptions = {
         from: process.env.EMAIL_USER, // Sender address
@@ -19,7 +21,9 @@ const sendEmail = async (to, subject, text) => {
 
     try {
         await transporter.sendMail(mailOptions);
+
     } catch (err) {
+        // console.error('Failed to send email:', err);
         throw new Error('Unable to send email');
     }
 };

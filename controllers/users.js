@@ -35,6 +35,8 @@ module.exports.signup = async (req, res, next) => {
 
             try {
                 await sendEmail(email, subject, text);
+                // console.log('Email sent successfully!');
+
             } catch (e) {
                 console.error('Error sending email:', e);
             }
